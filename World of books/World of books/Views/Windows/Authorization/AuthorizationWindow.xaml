@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Authorization"
+        xmlns:vm="clr-namespace:World_of_books.ViewModels"
         mc:Ignorable="d"
-        Title="AuthorizationWindow" Height="450" Width="800">
+        Title="AuthorizationWindow" 
+        Height="680" Width="880" MinHeight="650" MinWidth="850">
+    <Window.DataContext>
+        <vm:AuthorizationWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         
     </Grid>

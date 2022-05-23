@@ -9,6 +9,11 @@ namespace World_of_books.ViewModels
 {
     internal class AuthorizationWindowViewModel : ViewModelBase
     {
-
+        private string _title = "Test";
+        public string Title
+        {
+            get => _title;
+            set => Set(ref _title, value);
+        }
     }
 }
