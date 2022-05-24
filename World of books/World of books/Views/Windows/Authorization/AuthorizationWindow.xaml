@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:World_of_books.ViewModels"
         mc:Ignorable="d"
         Title="AuthorizationWindow" 
-        Height="680" Width="880" MinHeight="650" MinWidth="850">
+        Height="680" Width="880" ResizeMode="CanMinimize">
     <Window.DataContext>
         <vm:AuthorizationWindowViewModel/>
     </Window.DataContext>
@@ -29,7 +29,7 @@
                 <Button Content="Log In" FontSize="24" Margin="0,25,0,0"/>
             </StackPanel>
 
-            <Button Content="Sing Up →" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+            <Button Content="Sing Up →" Command="{Binding OpenRegistrationWindowCommand}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
         </Grid>
     </Grid>
 </Window>
