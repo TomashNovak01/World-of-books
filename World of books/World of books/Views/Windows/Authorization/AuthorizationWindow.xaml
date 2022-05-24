@@ -12,6 +12,24 @@
         <vm:AuthorizationWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Grid Grid.Column="1" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                <TextBlock Text="World of books" FontSize="24"/>
+
+                <TextBox Text="Login" FontSize="18" Margin="0,35,0,0"></TextBox>
+                <TextBox Text="Password" FontSize="18" Margin="0,10,0,0"></TextBox>
+
+                <Button Content="Log In" FontSize="24" Margin="0,25,0,0"/>
+            </StackPanel>
+
+            <Button Content="Sing Up →" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+        </Grid>
     </Grid>
 </Window>
