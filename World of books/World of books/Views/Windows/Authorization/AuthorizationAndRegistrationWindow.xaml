@@ -1,13 +1,14 @@
-﻿<Window x:Class="World_of_books.Views.Windows.Authorization.AthorizationAndRegistrationWindow"
+﻿<Window x:Class="World_of_books.Views.Windows.Authorization.AuthorizationAndRegistrationWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Authorization"
         xmlns:viewModel="clr-namespace:World_of_books.ViewModels"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fontAwesome="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="Авторизация"
+        Title="{Binding Title}"
         Height="680" Width="880" ResizeMode="CanMinimize">
     <Window.DataContext>
         <viewModel:AuthorAndRegWindowViewModel/>
@@ -20,17 +21,8 @@
 
         <Image Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <Grid x:Name="mainGrid" Grid.Column="1" HorizontalAlignment="Center">
-            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                <TextBlock Text="World of books" FontSize="24"/>
-
-                <TextBox Text="Login" FontSize="18" Margin="0,35,0,0"></TextBox>
-                <TextBox Text="Password" FontSize="18" Margin="0,10,0,0"></TextBox>
-
-                <Button Content="Log In" FontSize="24" Margin="0,25,0,0"/>
-            </StackPanel>
-
-            <Button Content="Sing Up →" Command="{Binding OpenRegistrationWindowCommand}" VerticalAlignment="Bottom" Margin="0,0,0,25"/>
+        <Grid x:Name="mainGrid" Grid.Column="1" Margin="100 0">
+            
         </Grid>
     </Grid>
 </Window>

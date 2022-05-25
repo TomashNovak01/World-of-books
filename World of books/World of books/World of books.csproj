@@ -87,10 +87,16 @@
     </Compile>
     <Compile Include="Infrastructures\Commands\Base\CommandBase.cs" />
     <Compile Include="Infrastructures\Commands\LambdaCommand.cs" />
-    <Compile Include="ViewModels\AuthorAndRegWindowViewModel.cs" />
+    <Compile Include="ViewModels\AuthorizationAndRegistration\AuthorAndRegWindowViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
-    <Compile Include="Views\Windows\Authorization\AthorizationAndRegistrationWindow.xaml.cs">
-      <DependentUpon>AthorizationAndRegistrationWindow.xaml</DependentUpon>
+    <Compile Include="Views\Windows\Authorization\AuthorizationAndRegistrationWindow.xaml.cs">
+      <DependentUpon>AuthorizationAndRegistrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Authorization\AuthorizationPage.xaml.cs">
+      <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Authorization\RegistrationPage.xaml.cs">
+      <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +144,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\Windows\Authorization\AthorizationAndRegistrationWindow.xaml">
+    <Page Include="Views\Windows\Authorization\AuthorizationAndRegistrationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Authorization\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Authorization\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

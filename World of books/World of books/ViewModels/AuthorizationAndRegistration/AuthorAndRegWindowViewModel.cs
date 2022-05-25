@@ -14,7 +14,7 @@ namespace World_of_books.ViewModels
         #region Fields
 
         #region Title
-        private string _title = "Test";
+        private string _title = "Авторизация";
         public string Title
         {
             get => _title;

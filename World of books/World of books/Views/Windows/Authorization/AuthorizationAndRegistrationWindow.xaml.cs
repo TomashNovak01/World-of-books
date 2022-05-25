@@ -2,9 +2,9 @@
 
 namespace World_of_books.Views.Windows.Authorization
 {
-    public partial class AthorizationAndRegistrationWindow : Window
+    public partial class AuthorizationAndRegistrationWindow : Window
     {
-        public AthorizationAndRegistrationWindow()
+        public AuthorizationAndRegistrationWindow()
         {
             InitializeComponent();
         }
