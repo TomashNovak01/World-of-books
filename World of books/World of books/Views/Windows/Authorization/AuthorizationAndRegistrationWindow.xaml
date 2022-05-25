@@ -22,7 +22,7 @@
         <Image Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Grid x:Name="mainGrid" Grid.Column="1" Margin="100 0">
-            
+            <Frame x:Name="mainFrame"/>
         </Grid>
     </Grid>
 </Window>
