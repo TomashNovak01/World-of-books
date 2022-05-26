@@ -7,6 +7,7 @@ namespace World_of_books.Views.Windows.Authorization
         public AuthorizationAndRegistrationWindow()
         {
             InitializeComponent();
+            mainFrame.Navigate(new AuthorizationPage());
         }
     }
 }

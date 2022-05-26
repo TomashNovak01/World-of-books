@@ -4,15 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Authorization"
-        xmlns:viewModel="clr-namespace:World_of_books.ViewModels"
+        xmlns:viewModel="clr-namespace:World_of_books.ViewModels.AuthorizationAndRegistration"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fontAwesome="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="{Binding Title}"
+        Title="Тест"
         Height="680" Width="880" ResizeMode="CanMinimize">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <viewModel:AuthorAndRegWindowViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

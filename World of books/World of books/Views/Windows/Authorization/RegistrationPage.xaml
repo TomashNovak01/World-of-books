@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:World_of_books.Views.Windows.Authorization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegistrationPage">
+      KeepAlive="False" WindowTitle="Авторизация">
 
     <Grid>
         
