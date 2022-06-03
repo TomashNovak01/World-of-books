@@ -151,6 +151,7 @@
     <Compile Include="ViewModels\AuthorizationAndRegistration\AuthorAndRegWindowViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationAndRegistration\AuthorizationPageViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationAndRegistration\RegistrationPageViewModel.cs" />
+    <Compile Include="ViewModels\AuthorizationAndRegistration\WelcomePageViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="Views\Windows\Authorization\AuthorizationAndRegistrationWindow.xaml.cs">
       <DependentUpon>AuthorizationAndRegistrationWindow.xaml</DependentUpon>
@@ -160,6 +161,9 @@
     </Compile>
     <Compile Include="Views\Windows\Authorization\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Authorization\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\Authorization\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Authorization\WelcomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
