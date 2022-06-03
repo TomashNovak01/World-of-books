@@ -19,12 +19,30 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         }
         #endregion
 
+        #region Login
+        private string _login;
+        public string Login
+        {
+            get => _login;
+            set => Set(ref _login, value);
+        }
+        #endregion
+
+        #region Password
+        private string _password;
+        public string Password
+        {
+            get => _password;
+            set => Set(ref _password, value);
+        }
+        #endregion
         #endregion
 
         public AuthorizationPageViewModel()
         {
             #region Commands
 
+            LogInCommand = new LambdaCommand(_onLogInCommandExcuted, _canLogInCommandExcute);
             OpenRegistrationPageCommand = new LambdaCommand(_onOpenRegistrationPageCommandExcuted, _canOpenRegistrationPageCommandExcute);
 
             #endregion
@@ -38,6 +56,18 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private void _onOpenRegistrationPageCommandExcuted(object p)
         {
 
+        }
+        #endregion
+
+        #region LogInCommand
+        public ICommand LogInCommand { get; }
+        private bool _canLogInCommandExcute(object p)
+        {
+            return true;
+        }
+        private void _onLogInCommandExcuted(object p)
+        {
+            
         }
         #endregion
 

@@ -34,5 +34,7 @@ namespace World_of_books.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
         public virtual Role Role { get; set; }
+
+        public static User CurrentUser { get; set; }
     }
 }
