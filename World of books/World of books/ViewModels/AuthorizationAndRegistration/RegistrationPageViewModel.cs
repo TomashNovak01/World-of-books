@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows.Controls;
+using System.Windows.Input;
 using World_of_books.Infrastructures.Commands;
 using World_of_books.ViewModels.Base;
 using World_of_books.Views.Windows.Authorization;
@@ -9,14 +10,19 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
     {
         #region Fields
 
-        private AuthorizationAndRegistrationWindow _window { get; set; }
 
+        #region AuthorizationPage
+        private Page _authorizationPage;
+        public Page AuthorizationPage
+        {
+            get => _authorizationPage;
+            set => Set(ref _authorizationPage, value);
+        }
+        #endregion
         #endregion
 
         public RegistrationPageViewModel()
         {
-            _window = new AuthorizationAndRegistrationWindow();
-
             #region Commands
 
             OpenAuthorizationPageCommand = new LambdaCommand(_onOpenAuthorizationPageCommandExcuted, _canOpenAuthorizationPageCommandExcute);
@@ -31,8 +37,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private bool _canOpenAuthorizationPageCommandExcute(object p) => true;
         private void _onOpenAuthorizationPageCommandExcuted(object p)
         {
-            _window.mainFrame.Content = null;
-            _window.mainFrame.Navigate(new AuthorizationPage());
+
         }
         #endregion
 

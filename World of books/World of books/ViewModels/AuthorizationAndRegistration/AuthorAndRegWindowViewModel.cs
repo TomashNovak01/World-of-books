@@ -10,8 +10,6 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
     {
         #region Fields
 
-        private AuthorizationAndRegistrationWindow _window { get; set; }
-
         #region Title
         private string _title = "Авторизация";
         public string Title
@@ -22,7 +20,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         #endregion
 
         #region DefaultPage
-        private Page _defaultPage;
+        private Page _defaultPage = new AuthorizationPage();
         public Page DefaultPage
         {
             get => _defaultPage;
@@ -34,25 +32,13 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
 
         public AuthorAndRegWindowViewModel()
         {
-            _window = new AuthorizationAndRegistrationWindow();
 
             #region Commands
-
-            OpenDefaultPageCommand = new LambdaCommand(_onOpenDefaultPageCommandExcuted, _canOpenDefaultPageCommandExcute);
 
             #endregion
         }
 
         #region Commands
-
-        #region OpenDefaultPageCommand
-        public ICommand OpenDefaultPageCommand { get; }
-        private bool _canOpenDefaultPageCommandExcute(object p) => true;
-        private void _onOpenDefaultPageCommandExcuted(object p)
-        {
-            DefaultPage = new AuthorizationPage();
-        }
-        #endregion
 
         #endregion
     }

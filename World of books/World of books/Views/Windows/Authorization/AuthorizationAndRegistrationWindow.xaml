@@ -8,11 +8,11 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fontAwesome="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="Тест"
+        Title="{Binding Title}"
         Height="680" Width="880" ResizeMode="CanMinimize">
-    <!--<Window.DataContext>
+    <Window.DataContext>
         <viewModel:AuthorAndRegWindowViewModel/>
-    </Window.DataContext>-->
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -22,7 +22,7 @@
         <Image Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Grid x:Name="mainGrid"  Grid.Column="1" Margin="100 0">
-            <Frame x:Name="mainFrame" Content="{Binding Path=DefaultPage, Mode=TwoWay}"/>
+            <Frame x:Name="mainFrame" Content="{Binding DefaultPage, Mode=TwoWay}"/>
         </Grid>
     </Grid>
 </Window>
