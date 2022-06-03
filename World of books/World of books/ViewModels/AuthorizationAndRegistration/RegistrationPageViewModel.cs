@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using World_of_books.Infrastructures.Commands;
 using World_of_books.ViewModels.Base;
+using World_of_books.Views.Windows.Authorization;
 
 namespace World_of_books.ViewModels.AuthorizationAndRegistration
 {
@@ -11,7 +12,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
 
 
         #region AuthorizationPage
-        private Page _authorizationPage;
+        private Page _authorizationPage = new AuthorizationPage();
         public Page AuthorizationPage
         {
             get => _authorizationPage;
