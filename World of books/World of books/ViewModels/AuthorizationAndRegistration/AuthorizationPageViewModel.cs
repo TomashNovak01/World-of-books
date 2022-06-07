@@ -1,6 +1,10 @@
-﻿using System.Windows.Controls;
+﻿using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
+using World_of_books.Models;
 using World_of_books.ViewModels.Base;
 using World_of_books.Views.Windows.Authorization;
 
@@ -19,12 +23,12 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         }
         #endregion
 
-        #region Login
-        private string _login;
-        public string Login
+        #region Email
+        private string _email;
+        public string Email
         {
-            get => _login;
-            set => Set(ref _login, value);
+            get => _email;
+            set => Set(ref _email, value);
         }
         #endregion
 
@@ -55,19 +59,27 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private bool _canOpenRegistrationPageCommandExcute(object p) => true;
         private void _onOpenRegistrationPageCommandExcuted(object p)
         {
+            //AuthorAndRegWindowViewModel viewModel = new AuthorAndRegWindowViewModel();
+            //viewModel.DefaultPage = RegistrationPage;
 
+            // Переход на страницу "Регистрация".
         }
         #endregion
 
         #region LogInCommand
         public ICommand LogInCommand { get; }
-        private bool _canLogInCommandExcute(object p)
-        {
-            return true;
-        }
+        private bool _canLogInCommandExcute(object p) => true;
         private void _onLogInCommandExcuted(object p)
         {
-            
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+                MessageBox.Show("Введите недостающие данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+                SessionData.CurrentUser = CourseworkEntities.Instance.User.Where(u => u.E_mall == Email && u.Password == Password).FirstOrDefault();
+
+            if (SessionData.CurrentUser == null)
+                MessageBox.Show("Пользователь не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            // Переход на страницу "Добро пожаловать".
         }
         #endregion
 
