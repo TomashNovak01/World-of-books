@@ -1,4 +1,5 @@
-﻿using World_of_books.ViewModels.Base;
+﻿using World_of_books.Data.Classes;
+using World_of_books.ViewModels.Base;
 
 namespace World_of_books.ViewModels.AuthorizationAndRegistration
 {
@@ -7,7 +8,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         #region Fields
 
         #region UserName
-        private string _userName;
+        private string _userName = $"{SessionData.CurrentUser.Lastname} {SessionData.CurrentUser.Firstname} {SessionData.CurrentUser.Middlename}";
         public string UserName
         {
             get => _userName;
@@ -16,7 +17,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         #endregion
 
         #region UserRole
-        private string _userRole;
+        private string _userRole = SessionData.CurrentUser.Role.Name;
         public string UserRole
         {
             get => _userRole;
@@ -28,7 +29,15 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
 
         public WelcomePageViewModel()
         {
+            #region Commands
 
+            #endregion
         }
+
+        #region Commands
+        #region OpenNewWindowCommand
+
+        #endregion
+        #endregion
     }
 }

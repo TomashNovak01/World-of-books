@@ -9,7 +9,6 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
     internal class AuthorAndRegWindowViewModel : ViewModelBase
     {
         #region Fields
-
         #region Title
         private string _title = "World of books";
         public string Title
@@ -28,13 +27,14 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         }
         #endregion
 
+        #region MainFrame
+        public static Frame MainFrame { get; set; }
+        #endregion
         #endregion
 
         public AuthorAndRegWindowViewModel()
         {
-
             #region Commands
-
             #endregion
         }
 

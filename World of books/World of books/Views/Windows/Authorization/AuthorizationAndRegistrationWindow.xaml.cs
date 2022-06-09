@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using World_of_books.ViewModels.AuthorizationAndRegistration;
 
 namespace World_of_books.Views.Windows.Authorization
 {
@@ -7,6 +8,7 @@ namespace World_of_books.Views.Windows.Authorization
         public AuthorizationAndRegistrationWindow()
         {
             InitializeComponent();
+            AuthorAndRegWindowViewModel.MainFrame = mainFrame;
         }
     }
 }

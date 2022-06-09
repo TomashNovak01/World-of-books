@@ -57,13 +57,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         #region OpenRegistrationPageCommand
         public ICommand OpenRegistrationPageCommand { get; }
         private bool _canOpenRegistrationPageCommandExcute(object p) => true;
-        private void _onOpenRegistrationPageCommandExcuted(object p)
-        {
-            //AuthorAndRegWindowViewModel viewModel = new AuthorAndRegWindowViewModel();
-            //viewModel.DefaultPage = RegistrationPage;
-
-            // Переход на страницу "Регистрация".
-        }
+        private void _onOpenRegistrationPageCommandExcuted(object p) => AuthorAndRegWindowViewModel.MainFrame.Navigate(new RegistrationPage());
         #endregion
 
         #region LogInCommand
@@ -72,14 +66,20 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private void _onLogInCommandExcuted(object p)
         {
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            {
                 MessageBox.Show("Введите недостающие данные!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             else
                 SessionData.CurrentUser = CourseworkEntities.Instance.User.Where(u => u.E_mall == Email && u.Password == Password).FirstOrDefault();
 
             if (SessionData.CurrentUser == null)
+            {
                 MessageBox.Show("Пользователь не найден!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-
-            // Переход на страницу "Добро пожаловать".
+                return;
+            }
+            else
+                AuthorAndRegWindowViewModel.MainFrame.Navigate(new WelcomePage());
         }
         #endregion
 

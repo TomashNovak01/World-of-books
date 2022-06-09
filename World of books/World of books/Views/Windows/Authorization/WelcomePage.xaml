@@ -17,31 +17,22 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-        <Image Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
-
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="0, 25">
+        <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 25">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Welcome " FontSize="24" FontWeight="Bold"/>
-                <TextBlock Text="{Binding UserName}" FontSize="24" FontWeight="Bold"/>
+                <TextBlock Text="Добро пожаловать  " FontSize="24" FontWeight="Bold"/>
+                <TextBlock Text="{Binding UserName}" FontSize="24" FontWeight="Bold" TextWrapping="Wrap"/>
                 
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="You log in as " Margin="0,15" FontSize="18"/>
+                <TextBlock Text="Вы зашли как " Margin="0,15" FontSize="18"/>
                 <TextBlock Text="{Binding UserRole}" Margin="0,15" FontSize="18"/>                
             </StackPanel>
         </StackPanel>
         
-        <Button Content="Продолжить" Grid.Row="2" Grid.ColumnSpan="3" Margin="25, 0"/>
+        <Button Content="Продолжить" Grid.Row="2" Margin="25, 0"/>
     </Grid>
 </Page>
