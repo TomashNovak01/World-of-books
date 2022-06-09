@@ -33,6 +33,6 @@
             </StackPanel>
         </StackPanel>
         
-        <Button Content="Продолжить" Grid.Row="2" Margin="25, 0"/>
+        <Button Content="Продолжить" Command="{Binding OpenNewWindowCommand}" Grid.Row="2" Margin="25, 0"/>
     </Grid>
 </Page>
