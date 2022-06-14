@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using World_of_books.Infrastructures.Commands;
@@ -102,7 +103,8 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         {
             _listErrors.Clear();
 
-            TryLastAndFirstName(_lastName, _firstName);
+            TryLastAndFirstNameAndPassword(_lastName, _firstName, _password);
+            TryEmail(_email);
 
             if(_listErrors.Count > 0)
             {
@@ -113,14 +115,26 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         #endregion
 
         #region TryData
-        private void TryLastAndFirstName(params string[] names)
+        private void TryLastAndFirstNameAndPassword(params string[] parameters)
         {
-            foreach(var name in names)
-                if (string.IsNullOrEmpty(name))
+            foreach(var parameter in parameters)
+                if (string.IsNullOrEmpty(parameter))
                 {
-                    _listErrors.Add("фамилия и имя");
+                    _listErrors.Add("фамилия или имя или пароль");
                     return;
                 }
+        }
+
+        private void TryEmail(string email)
+        {
+            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+
+            if (!regex.IsMatch(email))
+            {
+                _listErrors.Add("почта");
+                return;
+            }
         }
         #endregion
         #endregion
