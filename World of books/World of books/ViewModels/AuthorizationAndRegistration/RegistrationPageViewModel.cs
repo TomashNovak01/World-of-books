@@ -56,6 +56,15 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         }
         #endregion
 
+        #region Gender
+        private string _gender;
+        public string Gender
+        {
+            get => _gender;
+            set => Set(ref _gender, value);
+        }
+        #endregion
+
         #region BirthdayDate
         private string _birthdayDate;
         public string BirthdayDate
@@ -75,7 +84,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         #endregion
 
         #region ListErrors
-        private List<string> _listErrors;
+        private List<string> _listErrors = new List<string>();
         #endregion
         #endregion
 
@@ -101,18 +110,20 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private bool _canCreateNewAccountCommandExcute(object p) => true;
         private void _onCreateNewAccountCommandExcuted(object p)
         {
-            _listErrors.Clear();
-
             TryLastAndFirstNameAndPassword(_lastName, _firstName, _password);
             TryEmail(_email);
+            TryNumberPhone(_numberPhone);
 
             if(_listErrors.Count > 0)
             {
-                MessageBox.Show($"Исправьте поля {string.Join(" ,", _listErrors.Select(e => e))}");
+                MessageBox.Show($"Исправьте поля: {string.Join(", ", _listErrors.Select(e => e))}.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
+                _listErrors.Clear();
                 return;
             }
+
+            SaveData();
+            OpenCustomerWindow();
         }
-        #endregion
 
         #region TryData
         private void TryLastAndFirstNameAndPassword(params string[] parameters)
@@ -127,14 +138,34 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
 
         private void TryEmail(string email)
         {
-            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
-            var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-
-            if (!regex.IsMatch(email))
+            if (!string.IsNullOrEmpty(email))
             {
-                _listErrors.Add("почта");
-                return;
+                string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+                var regex = new Regex(pattern, RegexOptions.IgnoreCase);
+
+                if (!regex.IsMatch(email))
+                    _listErrors.Add("почта");
             }
+            else
+                _listErrors.Add("почта");
+        }
+
+        private void TryNumberPhone(string phone)
+        {
+            if(!string.IsNullOrEmpty(phone))
+                if(phone.Length != 11 || !int.TryParse(phone, out int number))
+                    _listErrors.Add("номер телефона");
+        }
+        #endregion
+
+        private void SaveData()
+        {
+
+        }
+
+        private void OpenCustomerWindow()
+        {
+
         }
         #endregion
         #endregion

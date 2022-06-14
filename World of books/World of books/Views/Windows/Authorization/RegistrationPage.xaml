@@ -30,13 +30,29 @@
                 <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Пароль"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,35,0,0">
-                    <TextBlock Text="Ваш пол*" FontSize="18" Foreground="Gray"/>
-                    <RadioButton FontFamily="18" Content="Мужской" Margin="15 0"/>
-                    <RadioButton FontFamily="18" Content="Женский"/>
+                    <TextBlock Text="Ваш пол*" FontSize="18" Foreground="Gray" VerticalAlignment="Bottom"/>
+                    <ComboBox Text="{Binding Gender}" Margin="15 0" FontSize="18" Width="226">
+                        <ComboBoxItem Content="Мужской"/>
+                        <ComboBoxItem Content="Женский"/>
+                        <ComboBoxItem Content="А гендер"/>
+                        <ComboBoxItem Content="Гермафродит "/>
+                        <ComboBoxItem Content="Мужеженственный "/>
+                        <ComboBoxItem Content="Цис гендер"/>
+                        <ComboBoxItem Content="Цис мужчина"/>
+                        <ComboBoxItem Content="Цис женщина"/>
+                        <ComboBoxItem Content="Би гендер"/>
+                        <ComboBoxItem Content="Пан гендер"/>
+                        <ComboBoxItem Content="Транс гендер"/>
+                        <ComboBoxItem Content="Транс мужчина"/>
+                        <ComboBoxItem Content="Транс женщина"/>
+                        <ComboBoxItem Content="Трансексуал"/>
+                        <ComboBoxItem Content="Двудушный"/>
+                        <ComboBoxItem Content="Другое"/>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Дата рождения*" FontSize="20" Foreground="Gray" />
-                    <DatePicker Width="153" FontSize="18" Margin="15 0"/>
+                    <DatePicker Text="{Binding BirthdayDate}" Width="153" FontSize="18" Margin="15 0"/>
                 </StackPanel>
 
                 <TextBox Text="{Binding NumberPhone, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Номер телефона*" Margin="0,35,0,0"/>
@@ -47,7 +63,7 @@
 
         <Grid Grid.Row="1">
             <StackPanel Orientation="Vertical">
-                <Button Content="Продолжить" FontSize="20" materialDesign:ButtonAssist.CornerRadius="15"/>
+                <Button Content="Продолжить" Command="{Binding CreateNewAccountCommand}" FontSize="20" materialDesign:ButtonAssist.CornerRadius="15"/>
                 <Button Content="← Авторизация" Command="{Binding OpenAuthorizationPageCommand}" Foreground="Black" Background="Transparent" BorderBrush="Transparent" Margin="0 15"/>
             </StackPanel>
         </Grid>
