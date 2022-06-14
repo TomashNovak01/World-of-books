@@ -19,7 +19,7 @@
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Resources/Images/Logo/logo.png" Margin="25,0,0,0"/>
 
         <Grid x:Name="mainGrid"  Grid.Column="1" Margin="100 0">
             <Frame x:Name="mainFrame" Content="{Binding DefaultPage, Mode=TwoWay}" NavigationUIVisibility="Hidden"/>
