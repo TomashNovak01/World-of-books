@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
+using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
+using World_of_books.Models;
 using World_of_books.ViewModels.Base;
 
 namespace World_of_books.ViewModels.AuthorizationAndRegistration
@@ -152,15 +155,34 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
 
         private void TryNumberPhone(string phone)
         {
-            if(!string.IsNullOrEmpty(phone))
-                if(phone.Length != 11 || !int.TryParse(phone, out int number))
-                    _listErrors.Add("номер телефона");
+            if (phone.Length < 11 || !int.TryParse(phone, out int number))
+                _listErrors.Add("номер телефона");
         }
         #endregion
 
         private void SaveData()
         {
+            int customerRole = 1;
 
+            User newUser = new User()
+            {
+                IdRole = customerRole,
+                Firstname = _firstName,
+                Lastname = _lastName,
+                Middlename = _middleName,
+                Password = _password,
+                E_mall = _email,
+                Gender = _gender,
+                DateOfBirth = Convert.ToDateTime(_birthdayDate),
+                NumberPhone = _numberPhone,
+            };
+
+            SessionData.CurrentUser = newUser;
+
+            if (newUser == null)
+                MessageBox.Show("!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            else
+                MessageBox.Show("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         }
 
         private void OpenCustomerWindow()
