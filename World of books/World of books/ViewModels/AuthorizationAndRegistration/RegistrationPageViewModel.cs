@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 using World_of_books.Infrastructures.Commands;
 using World_of_books.ViewModels.Base;
 
@@ -52,6 +55,15 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         }
         #endregion
 
+        #region BirthdayDate
+        private string _birthdayDate;
+        public string BirthdayDate
+        {
+            get => _birthdayDate;
+            set => Set(ref _birthdayDate, value);
+        }
+        #endregion
+
         #region NumberPhone
         private string _numberPhone;
         public string NumberPhone
@@ -60,14 +72,17 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
             set => Set(ref _numberPhone, value);
         }
         #endregion
+
+        #region ListErrors
+        private List<string> _listErrors;
+        #endregion
         #endregion
 
         public RegistrationPageViewModel()
         {
             #region Commands
-
             OpenAuthorizationPageCommand = new LambdaCommand(_onOpenAuthorizationPageCommandExcuted, _canOpenAuthorizationPageCommandExcute);
-
+            CreateNewAccountCommand = new LambdaCommand(_onCreateNewAccountCommandExcuted, _canCreateNewAccountCommandExcute);
             #endregion
         }
 
@@ -79,6 +94,35 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private void _onOpenAuthorizationPageCommandExcuted(object p) => AuthorAndRegWindowViewModel.MainFrame.GoBack();
         #endregion
 
+
+        #region CreateNewAccountCommand
+        public ICommand CreateNewAccountCommand { get; }
+        private bool _canCreateNewAccountCommandExcute(object p) => true;
+        private void _onCreateNewAccountCommandExcuted(object p)
+        {
+            _listErrors.Clear();
+
+            TryLastAndFirstName(_lastName, _firstName);
+
+            if(_listErrors.Count > 0)
+            {
+                MessageBox.Show($"Исправьте поля {string.Join(" ,", _listErrors.Select(e => e))}");
+                return;
+            }
+        }
+        #endregion
+
+        #region TryData
+        private void TryLastAndFirstName(params string[] names)
+        {
+            foreach(var name in names)
+                if (string.IsNullOrEmpty(name))
+                {
+                    _listErrors.Add("фамилия и имя");
+                    return;
+                }
+        }
+        #endregion
         #endregion
     }
 }
