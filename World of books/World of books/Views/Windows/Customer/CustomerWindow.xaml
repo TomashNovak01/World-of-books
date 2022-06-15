@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Customer"
         xmlns:viewModel="clr-namespace:World_of_books.ViewModels.Customer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="650" Width="800" MinHeight="350" MinWidth="400">
+        Title="CustomerWindow" Height="710" Width="800" MinHeight="400" MinWidth="500">
 
     <Window.DataContext>
         <viewModel:CustomerWindowViewModel/>
@@ -28,7 +29,46 @@
 
         <TabControl>
             <TabItem Header="Аккаунт">
-                
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0 15">
+                        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Фамилия" materialDesign:HintAssist.IsFloating="True"/>
+                        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Имя" materialDesign:HintAssist.IsFloating="True"/>
+                        <TextBox Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Отчество*" materialDesign:HintAssist.IsFloating="True"/>
+
+                        <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Почта" Margin="0,35,0,0" materialDesign:HintAssist.IsFloating="True"/>
+                        <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Пароль" materialDesign:HintAssist.IsFloating="True"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,35,0,0">
+                            <TextBlock Text="Ваш пол*" FontSize="18" Foreground="Gray" VerticalAlignment="Bottom"/>
+                            <ComboBox Text="{Binding Gender, UpdateSourceTrigger=PropertyChanged}" Margin="15 0" FontSize="18" Width="226">
+                                <ComboBoxItem Content="Мужской"/>
+                                <ComboBoxItem Content="Женский"/>
+                                <ComboBoxItem Content="А гендер"/>
+                                <ComboBoxItem Content="Гермафродит "/>
+                                <ComboBoxItem Content="Мужеженственный "/>
+                                <ComboBoxItem Content="Цис гендер"/>
+                                <ComboBoxItem Content="Цис мужчина"/>
+                                <ComboBoxItem Content="Цис женщина"/>
+                                <ComboBoxItem Content="Би гендер"/>
+                                <ComboBoxItem Content="Пан гендер"/>
+                                <ComboBoxItem Content="Транс гендер"/>
+                                <ComboBoxItem Content="Транс мужчина"/>
+                                <ComboBoxItem Content="Транс женщина"/>
+                                <ComboBoxItem Content="Трансексуал"/>
+                                <ComboBoxItem Content="Двудушный"/>
+                                <ComboBoxItem Content="Другое"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Дата рождения*" FontSize="20" Foreground="Gray" />
+                            <DatePicker Text="{Binding BirthdayDate, UpdateSourceTrigger=PropertyChanged}" Width="153" FontSize="18" Margin="15 0"/>
+                        </StackPanel>
+
+                        <TextBox Text="{Binding NumberPhone, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Номер телефона*" materialDesign:HintAssist.IsFloating="True" Margin="0,35,0,0" MaxLength="11"/>
+
+                        <Button Content="Сохранить изменения" materialDesign:ButtonAssist.CornerRadius="15" Margin="0,35,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Все книги">
                 

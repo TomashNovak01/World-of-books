@@ -16,6 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{4AB88BDD-449
 		..\..\..\..\..\Program Files\MSSQL15.MSSQLSERVER\MSSQL\Backup\db_CourseworkByGolkovOleg.bak = ..\..\..\..\..\Program Files\MSSQL15.MSSQLSERVER\MSSQL\Backup\db_CourseworkByGolkovOleg.bak
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{B609E35B-345B-46B0-BDBD-019FB698763F}"
+	ProjectSection(SolutionItems) = preProject
+		Вправки.txt = Вправки.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
