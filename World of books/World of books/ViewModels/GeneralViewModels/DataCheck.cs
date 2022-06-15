@@ -43,10 +43,14 @@ namespace World_of_books.ViewModels.GeneralViewModels
 
         public static bool TryNumberPhone(string phone)
         {
-            if (phone.Length < 11 || !long.TryParse(phone, out long number))
+            if (!string.IsNullOrEmpty(phone))
             {
-                ListErrors.Add("номер телефона");
-                return false;
+                if (phone.Length < 11 || !long.TryParse(phone, out long number))
+                {
+                    ListErrors.Add("номер телефона");
+                    return false;
+                }
+                return true;
             }
             return true;
         }
