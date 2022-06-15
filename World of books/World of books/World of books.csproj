@@ -153,6 +153,7 @@
     <Compile Include="ViewModels\AuthorizationAndRegistration\RegistrationPageViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationAndRegistration\WelcomePageViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Customer\CustomerWindowViewModel.cs" />
     <Compile Include="Views\Windows\Administration\AdministrationWindow.xaml.cs">
       <DependentUpon>AdministrationWindow.xaml</DependentUpon>
     </Compile>
@@ -210,7 +211,6 @@
     <Folder Include="Data\Res\Logo\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\Administrator\" />
-    <Folder Include="ViewModels\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

@@ -4,8 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Customer"
+        xmlns:viewModel="clr-namespace:World_of_books.ViewModels.Customer"
         mc:Ignorable="d"
         Title="CustomerWindow" Height="650" Width="800" MinHeight="350" MinWidth="400">
+
+    <Window.DataContext>
+        <viewModel:CustomerWindowViewModel/>
+    </Window.DataContext>
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
