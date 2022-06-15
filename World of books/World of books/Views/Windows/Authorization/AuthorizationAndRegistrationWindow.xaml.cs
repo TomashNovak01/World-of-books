@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using World_of_books.Data.Classes;
 using World_of_books.ViewModels.AuthorizationAndRegistration;
 
 namespace World_of_books.Views.Windows.Authorization
@@ -9,6 +10,7 @@ namespace World_of_books.Views.Windows.Authorization
         {
             InitializeComponent();
             AuthorAndRegWindowViewModel.MainFrame = mainFrame;
+            SessionData.CurrentWindow = this;
         }
     }
 }

@@ -6,6 +6,17 @@ namespace World_of_books.Data.Classes
     internal class SessionData
     {
         public static User CurrentUser { get; set; }
-        public static Window CurrentWindow { get; set; }
+
+        private static Window _currentWindow;
+        public static Window CurrentWindow
+        {
+            get => _currentWindow;
+            set
+            {
+                if(_currentWindow != null)
+                    _currentWindow.Close();
+                _currentWindow = value;
+            }
+        }
     }
 }

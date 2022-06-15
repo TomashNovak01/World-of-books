@@ -186,7 +186,6 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
 
         private void OpenCustomerWindow()
         {
-            SessionData.CurrentWindow.Close();
             SessionData.CurrentWindow = new CustomerWindow();
             SessionData.CurrentWindow.Show();
         }

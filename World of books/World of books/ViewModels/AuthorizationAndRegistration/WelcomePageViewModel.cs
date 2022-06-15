@@ -48,8 +48,6 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private bool _canOpenNewWindowCommandExcute(object p) => true;
         private void _onOpenNewWindowCommandExcuted(object p)
         {
-            SessionData.CurrentWindow.Close();
-
             if (SessionData.CurrentUser.IdRole == ADMINISTRATION_ROLE)
                 SessionData.CurrentWindow = new AdministrationWindow();
             else if (SessionData.CurrentUser.IdRole == CUSTOMER_ROLE)
