@@ -118,7 +118,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
             TryEmail(_email);
             TryNumberPhone(_numberPhone);
 
-            if(_listErrors.Count > 0)
+            if (_listErrors.Count > 0)
             {
                 MessageBox.Show($"Исправьте поля: {string.Join(", ", _listErrors.Select(e => e))}.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
                 _listErrors.Clear();
@@ -132,7 +132,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         #region TryData
         private void TryLastAndFirstNameAndPassword(params string[] parameters)
         {
-            foreach(var parameter in parameters)
+            foreach (var parameter in parameters)
                 if (string.IsNullOrEmpty(parameter))
                 {
                     _listErrors.Add("фамилия или имя или пароль");
