@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows;
 using System.Windows.Input;
 using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
 using World_of_books.Models;
 using World_of_books.ViewModels.Base;
+using World_of_books.ViewModels.GeneralViewModels;
 using World_of_books.Views.Windows.Customer;
 
 namespace World_of_books.ViewModels.AuthorizationAndRegistration
@@ -86,10 +83,6 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
             set => Set(ref _numberPhone, value);
         }
         #endregion
-
-        #region ListErrors
-        private List<string> _listErrors = new List<string>();
-        #endregion
         #endregion
 
         public RegistrationPageViewModel()
@@ -114,52 +107,15 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         private bool _canCreateNewAccountCommandExcute(object p) => true;
         private void _onCreateNewAccountCommandExcuted(object p)
         {
-            TryLastAndFirstNameAndPassword(_lastName, _firstName, _password);
-            TryEmail(_email);
-            TryNumberPhone(_numberPhone);
-
-            if (_listErrors.Count > 0)
+            if (DataCheck.TryLastAndFirstNameAndPassword(_lastName, _firstName, _password) &&
+                 DataCheck.TryEmail(_email) && DataCheck.TryNumberPhone(_numberPhone))
             {
-                MessageBox.Show($"Исправьте поля: {string.Join(", ", _listErrors.Select(e => e))}.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Information);
-                _listErrors.Clear();
-                return;
-            }
-
-            SaveData();
-            OpenCustomerWindow();
-        }
-
-        #region TryData
-        private void TryLastAndFirstNameAndPassword(params string[] parameters)
-        {
-            foreach (var parameter in parameters)
-                if (string.IsNullOrEmpty(parameter))
-                {
-                    _listErrors.Add("фамилия или имя или пароль");
-                    return;
-                }
-        }
-
-        private void TryEmail(string email)
-        {
-            if (!string.IsNullOrEmpty(email))
-            {
-                string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
-                var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-
-                if (!regex.IsMatch(email))
-                    _listErrors.Add("почта");
+                SaveData();
+                OpenCustomerWindow();
             }
             else
-                _listErrors.Add("почта");
+                DataCheck.ShowErrors();
         }
-
-        private void TryNumberPhone(string phone)
-        {
-            if (phone.Length < 11 || !long.TryParse(phone, out long number))
-                _listErrors.Add("номер телефона");
-        }
-        #endregion
 
         private void SaveData()
         {
