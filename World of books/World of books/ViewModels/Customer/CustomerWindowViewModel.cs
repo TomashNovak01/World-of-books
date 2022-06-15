@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
 using World_of_books.ViewModels.Base;
+using World_of_books.ViewModels.GeneralViewModels;
 using World_of_books.Views.Windows.Authorization;
 
 namespace World_of_books.ViewModels.Customer
@@ -93,6 +95,7 @@ namespace World_of_books.ViewModels.Customer
         {
             #region Commands
             OpenStartWindowCommand = new LambdaCommand(_onOpenStartWindowCommandExcuted, _canOpenStartWindowCommandExcute);
+            ChangeDataCommand = new LambdaCommand(_onChangeDataCommandExcuted, _canChangeDataCommandExcute);
             #endregion
         }
 
@@ -104,6 +107,34 @@ namespace World_of_books.ViewModels.Customer
         {
             SessionData.CurrentWindow = new AuthorizationAndRegistrationWindow();
             SessionData.CurrentWindow.Show();
+        }
+        #endregion
+
+        #region ChangeDataCommand
+        public ICommand ChangeDataCommand { get; }
+        private bool _canChangeDataCommandExcute(object p) => true;
+        private void _onChangeDataCommandExcuted(object p)
+        {
+            if (DataCheck.TryLastAndFirstNameAndPassword(_lastName, _firstName, _password) &&
+                DataCheck.TryEmail(_email) && DataCheck.TryNumberPhone(_numberPhone))
+            {
+                ChangeData();
+                MessageBox.Show("Вы успешно изменили данные о себе.", "Изменение выполнено", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+                DataCheck.ShowErrors();
+        }
+
+        private void ChangeData()
+        {
+            SessionData.CurrentUser.Lastname = _lastName;
+            SessionData.CurrentUser.Firstname = _firstName;
+            SessionData.CurrentUser.Middlename = _middleName;
+            SessionData.CurrentUser.Password = _password;
+            SessionData.CurrentUser.Gender = _gender;
+            SessionData.CurrentUser.E_mall = _email;
+            SessionData.CurrentUser.DateOfBirth = Convert.ToDateTime(_birthdayDate);
+            SessionData.CurrentUser.NumberPhone = _numberPhone;
         }
         #endregion
         #endregion

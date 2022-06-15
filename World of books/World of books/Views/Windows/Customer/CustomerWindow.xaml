@@ -66,7 +66,7 @@
 
                         <TextBox Text="{Binding NumberPhone, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Номер телефона*" materialDesign:HintAssist.IsFloating="True" Margin="0,35,0,0" MaxLength="11"/>
 
-                        <Button Content="Сохранить изменения" materialDesign:ButtonAssist.CornerRadius="15" Margin="0,35,0,0"/>
+                        <Button Content="Сохранить изменения" Command="{Binding ChangeDataCommand}" materialDesign:ButtonAssist.CornerRadius="15" Margin="0,35,0,0"/>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
