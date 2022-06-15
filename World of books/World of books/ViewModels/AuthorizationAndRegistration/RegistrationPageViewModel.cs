@@ -155,7 +155,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
 
         private void TryNumberPhone(string phone)
         {
-            if (phone.Length < 11 || !int.TryParse(phone, out int number))
+            if (phone.Length < 11 || !long.TryParse(phone, out long number))
                 _listErrors.Add("номер телефона");
         }
         #endregion
