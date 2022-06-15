@@ -8,6 +8,7 @@ using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
 using World_of_books.Models;
 using World_of_books.ViewModels.Base;
+using World_of_books.Views.Windows.Customer;
 
 namespace World_of_books.ViewModels.AuthorizationAndRegistration
 {
@@ -178,16 +179,16 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
             };
 
             SessionData.CurrentUser = newUser;
+            CourseworkEntities.Instance.User.Add(SessionData.CurrentUser);
 
-            if (newUser == null)
-                MessageBox.Show("!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            else
-                MessageBox.Show("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            OpenCustomerWindow();
         }
 
         private void OpenCustomerWindow()
         {
-
+            SessionData.CurrentWindow.Close();
+            SessionData.CurrentWindow = new CustomerWindow();
+            SessionData.CurrentWindow.Show();
         }
         #endregion
         #endregion
