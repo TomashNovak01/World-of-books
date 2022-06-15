@@ -20,14 +20,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0,75,0,0">
+        <Grid Grid.Row="0">
             <StackPanel Orientation="Vertical">
-                <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Фамилия"/>
-                <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Имя"/>
-                <TextBox Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Отчество*"/>
-                
-                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Почта" Margin="0,35,0,0"/>
-                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Пароль"/>
+                <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Фамилия" materialDesign:HintAssist.IsFloating="True"/>
+                <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Имя" materialDesign:HintAssist.IsFloating="True"/>
+                <TextBox Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Отчество*" materialDesign:HintAssist.IsFloating="True"/>
+
+                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Почта" Margin="0,35,0,0" materialDesign:HintAssist.IsFloating="True"/>
+                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Пароль" materialDesign:HintAssist.IsFloating="True"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0,35,0,0">
                     <TextBlock Text="Ваш пол*" FontSize="18" Foreground="Gray" VerticalAlignment="Bottom"/>
@@ -55,7 +55,7 @@
                     <DatePicker Text="{Binding BirthdayDate}" Width="153" FontSize="18" Margin="15 0"/>
                 </StackPanel>
 
-                <TextBox Text="{Binding NumberPhone, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Номер телефона*" Margin="0,35,0,0" MaxLength="11"/>
+                <TextBox Text="{Binding NumberPhone, UpdateSourceTrigger=PropertyChanged}" FontSize="18"  materialDesign:HintAssist.Hint="Номер телефона*" materialDesign:HintAssist.IsFloating="True" Margin="0,35,0,0" MaxLength="11"/>
             </StackPanel>
 
             <TextBlock Text="* - не обязательные поля" VerticalAlignment="Bottom" FontSize="14" Margin="0 15"/>
