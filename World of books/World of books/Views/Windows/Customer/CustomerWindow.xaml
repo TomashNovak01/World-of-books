@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Customer"
         mc:Ignorable="d"
-        Title="CustomerWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="CustomerWindow" Height="650" Width="800" MinHeight="350" MinWidth="400">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход"/>
+            </MenuItem>
+            <MenuItem Header="О программе">
+                
+            </MenuItem>
+        </Menu>
+
+        <StatusBar DockPanel.Dock="Bottom">
+            
+        </StatusBar>
+
+        <TabControl>
+            <TabItem Header="Аккаунт">
+                
+            </TabItem>
+            <TabItem Header="Все книги">
+                
+            </TabItem>
+            <TabItem Header="Заказ">
+                
+            </TabItem>
+            <TabItem Header="Мои книги">
+                
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </Window>

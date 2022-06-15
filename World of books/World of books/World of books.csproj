@@ -209,6 +209,8 @@
   <ItemGroup>
     <Folder Include="Data\Res\Logo\" />
     <Folder Include="Services\" />
+    <Folder Include="ViewModels\Administrator\" />
+    <Folder Include="ViewModels\Customer\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
