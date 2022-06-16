@@ -137,6 +137,10 @@ namespace World_of_books.ViewModels.Customer
             SessionData.CurrentUser.NumberPhone = _numberPhone;
         }
         #endregion
+
+        #region MyRegion
+
+        #endregion
         #endregion
     }
 }

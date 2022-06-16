@@ -9,9 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewModel:BookControlViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
     
     <Grid>
         <Grid.RowDefinitions>
@@ -30,11 +30,11 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="{Binding Title}" FontWeight="Bold" VerticalAlignment="Center" FontSize="24" Grid.Row="0"/>
-            <TextBlock Text="{Binding Summary}" VerticalAlignment="Center" FontSize="18" Grid.Row="1"/>
-            <TextBlock Text="{Binding Cost}" VerticalAlignment="Center" FontSize="22" Grid.Row="2"/>
-            <TextBlock Text="{Binding Rating}" FontWeight="Bold" VerticalAlignment="Center" FontSize="24" Grid.Row="3"/>
-            <TextBlock Text="{Binding PublishHouse}" Foreground="Gray" VerticalAlignment="Center" FontSize="18" Grid.Row="4"/>
+            <TextBlock Text="Title" FontWeight="Bold" VerticalAlignment="Center" FontSize="24" Grid.Row="0"/>
+            <TextBlock Text="Summary" VerticalAlignment="Center" FontSize="18" Grid.Row="1"/>
+            <TextBlock Text="Cost" VerticalAlignment="Center" FontSize="22" Grid.Row="2"/>
+            <TextBlock Text="Rating" FontWeight="Bold" VerticalAlignment="Center" FontSize="24" Grid.Row="3"/>
+            <TextBlock Text="PublishHouse" Foreground="Gray" VerticalAlignment="Center" FontSize="18" Grid.Row="4"/>
         </Grid>
     </Grid>
 </UserControl>
