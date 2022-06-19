@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
+using World_of_books.Models;
 using World_of_books.ViewModels.Base;
 using World_of_books.ViewModels.GeneralViewModels;
 
@@ -54,12 +52,38 @@ namespace World_of_books.ViewModels.Administrator
         #endregion
 
         #region All the accounts
+        #region DisplayUsers
+        private List<User> _displayUsers = CourseworkEntities.Instance.User.ToList();
+        public List<User> DisplayUsers
+        {
+            get => _displayUsers;
+            set => Set(ref _displayUsers, value);
+        }
+        #endregion
+
         #region Finding
         private string _finding;
         public string Finding
         {
             get => _finding;
-            set => Set(ref _finding, value);
+            set
+            {
+                Set(ref _finding, value);
+                FindUser();
+            }
+        }
+        #endregion
+
+        #region Role
+        private string _role = "Все роли";
+        public string Role
+        {
+            get => _role;
+            set
+            {
+                Set(ref _role, value);
+                FindUser();
+            }
         }
         #endregion
         #endregion
@@ -69,6 +93,7 @@ namespace World_of_books.ViewModels.Administrator
         {
             #region Commands
             SaveChangesCommand = new LambdaCommand(_onSaveChangesCommandExcuted, _canSaveChangesCommandExcute);
+            OpenAddUserWindowCommand = new LambdaCommand(_onOpenAddUserWindowCommandExcuted, _canOpenAddUserWindowCommandExcute);
             #endregion
         }
 
@@ -93,10 +118,38 @@ namespace World_of_books.ViewModels.Administrator
             SessionData.CurrentUser.Firstname = _firstName;
             SessionData.CurrentUser.Password = _password;
             SessionData.CurrentUser.E_mall = _email;
+
+            CourseworkEntities.Instance.SaveChanges();
         }
         #endregion
 
+        #region OpenAddUserWindowCommand
+        public ICommand OpenAddUserWindowCommand { get; }
+        private bool _canOpenAddUserWindowCommandExcute(object p) => true;
+        private void _onOpenAddUserWindowCommandExcuted(object p)
+        {
+            
+        }
+        #endregion
 
+        #region FindUser
+        private void FindUser()
+        {
+            _displayUsers = CourseworkEntities.Instance.User.ToList();
+
+            if (_finding is var search && !string.IsNullOrEmpty(search))
+                _displayUsers = _displayUsers.Where(u => u.Lastname.Contains(search) ||
+                                                    u.Firstname.Contains(search) ||
+                                                    u.Middlename != null &&
+                                                    u.Middlename.Contains(search)).ToList();
+
+            if (_role != "System.Windows.Controls.ComboBoxItem: Все роли")
+                _displayUsers = _displayUsers.Where(u => u.Role.Name == _role.Replace("System.Windows.Controls.ComboBoxItem: ", "")).ToList();
+
+            if (_displayUsers.Count == 0)
+                MessageBox.Show("По вашему запросу товары не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+        #endregion
         #endregion
     }
 }

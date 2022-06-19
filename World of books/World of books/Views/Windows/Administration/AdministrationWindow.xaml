@@ -51,17 +51,36 @@
 
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBox Text="{Binding Finding, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="10 0" materialDesign:HintAssist.Hint="Поиск" materialDesign:HintAssist.IsFloating="True"/>
-                        <ComboBox Grid.Column="1" VerticalAlignment="Bottom" SelectedIndex="0" Margin="10 0">
+                        <ComboBox Grid.Column="1" VerticalAlignment="Bottom" SelectedIndex="0" SelectedItem="{Binding Role, UpdateSourceTrigger=PropertyChanged}" Margin="10 0">
                             <ComboBoxItem Content="Все роли"/>
                             <ComboBoxItem Content="Администраторы"/>
                             <ComboBoxItem Content="Клиенты"/>
                         </ComboBox>
+                        <Button Content="Добавить" Command="{Binding OpenAddUserWindowCommand}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5 5"  Grid.Column="2"/>
                     </Grid>
+
+                    <ListView Margin="5 5" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding DisplayUsers}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding ID}"/>
+                                <GridViewColumn Header="Роль" Width="Auto" DisplayMemberBinding="{Binding Role.Name}"/>
+                                <GridViewColumn Header="Фамилия" Width="Auto" DisplayMemberBinding="{Binding Lastname}"/>
+                                <GridViewColumn Header="Имя" Width="Auto" DisplayMemberBinding="{Binding Firstname}"/>
+                                <GridViewColumn Header="Отчество" Width="Auto" DisplayMemberBinding="{Binding Middlename}"/>
+                                <GridViewColumn Header="Почта" Width="Auto" DisplayMemberBinding="{Binding E_mall}"/>
+                                <GridViewColumn Header="Пароль" Width="Auto" DisplayMemberBinding="{Binding Password}"/>
+                                <GridViewColumn Header="Пол" Width="Auto" DisplayMemberBinding="{Binding Gender}"/>
+                                <GridViewColumn Header="Дата рождения" Width="Auto" DisplayMemberBinding="{Binding DateOfBirth}"/>
+                                <GridViewColumn Header="Номер телефона" Width="Auto" DisplayMemberBinding="{Binding NumberPhone}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </TabItem>
 
