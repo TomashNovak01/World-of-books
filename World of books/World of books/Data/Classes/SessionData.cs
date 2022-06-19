@@ -5,8 +5,11 @@ namespace World_of_books.Data.Classes
 {
     internal class SessionData
     {
+        #region CurrentUser
         public static User CurrentUser { get; set; }
+        #endregion
 
+        #region CurrentWindow
         private static Window _currentWindow;
         public static Window CurrentWindow
         {
@@ -18,5 +21,10 @@ namespace World_of_books.Data.Classes
                 _currentWindow = value;
             }
         }
+        #endregion
+
+        #region CurrentDialogue
+        public static Window CurrentDialogue { get; set; }
+        #endregion
     }
 }
