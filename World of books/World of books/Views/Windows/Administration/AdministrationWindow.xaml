@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:World_of_books.ViewModels.Administrator"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="450" Width="800" MinHeight="425" MinWidth="775">
 
     <Window.DataContext>
         <viewModel:AdministrationWindowViewModel/>
