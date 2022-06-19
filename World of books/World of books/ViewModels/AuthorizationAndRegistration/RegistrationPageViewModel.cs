@@ -121,7 +121,7 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
         {
             int customerRole = 1;
 
-            User newUser = new User()
+            SessionData.CurrentUser = new User()
             {
                 IdRole = customerRole,
                 Firstname = _firstName,
@@ -134,10 +134,8 @@ namespace World_of_books.ViewModels.AuthorizationAndRegistration
                 NumberPhone = _numberPhone,
             };
 
-            SessionData.CurrentUser = newUser;
             CourseworkEntities.Instance.User.Add(SessionData.CurrentUser);
-
-            OpenCustomerWindow();
+            CourseworkEntities.Instance.SaveChanges();
         }
 
         private void OpenCustomerWindow()
