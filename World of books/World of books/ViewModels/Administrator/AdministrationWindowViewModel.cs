@@ -7,6 +7,7 @@ using World_of_books.Infrastructures.Commands;
 using World_of_books.Models;
 using World_of_books.ViewModels.Base;
 using World_of_books.ViewModels.GeneralViewModels;
+using World_of_books.Views.Windows.Administration;
 
 namespace World_of_books.ViewModels.Administrator
 {
@@ -128,7 +129,8 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canOpenAddUserWindowCommandExcute(object p) => true;
         private void _onOpenAddUserWindowCommandExcuted(object p)
         {
-            
+            SessionData.CurrentDialogue = new AddUserWindow();
+            SessionData.CurrentDialogue.ShowDialog();
         }
         #endregion
 
