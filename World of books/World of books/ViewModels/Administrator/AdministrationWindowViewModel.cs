@@ -95,6 +95,9 @@ namespace World_of_books.ViewModels.Administrator
             #region Commands
             SaveChangesCommand = new LambdaCommand(_onSaveChangesCommandExcuted, _canSaveChangesCommandExcute);
             OpenAddUserWindowCommand = new LambdaCommand(_onOpenAddUserWindowCommandExcuted, _canOpenAddUserWindowCommandExcute);
+
+            ChangeUserCommand = new LambdaCommand(_onChangeUserCommandExcuted, _canChangeUserCommandExcute);
+            DeleteUserCommand = new LambdaCommand(_onDeleteUserCommandExcuted, _canDeleteUserCommandExcute);
             #endregion
         }
 
@@ -150,6 +153,24 @@ namespace World_of_books.ViewModels.Administrator
 
             if (_displayUsers.Count == 0)
                 MessageBox.Show("По вашему запросу товары не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+        #endregion
+
+        #region ChangeUserCommand
+        public ICommand ChangeUserCommand { get; }
+        private bool _canChangeUserCommandExcute(object p) => true;
+        private void _onChangeUserCommandExcuted(object p)
+        {
+
+        }
+        #endregion
+
+        #region DeleteUserCommand
+        public ICommand DeleteUserCommand { get; }
+        private bool _canDeleteUserCommandExcute(object p) => true;
+        private void _onDeleteUserCommandExcuted(object p)
+        {
+
         }
         #endregion
         #endregion

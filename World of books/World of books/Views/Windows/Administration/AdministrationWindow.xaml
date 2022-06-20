@@ -80,6 +80,12 @@
                                 <GridViewColumn Header="Номер телефона" Width="Auto" DisplayMemberBinding="{Binding NumberPhone}"/>
                             </GridView>
                         </ListView.View>
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Изменить пользователя"/>
+                                <MenuItem Header="Удалить пользователя"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </TabItem>
