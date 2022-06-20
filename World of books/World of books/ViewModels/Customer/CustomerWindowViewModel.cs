@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
+using World_of_books.Models;
 using World_of_books.ViewModels.Base;
 using World_of_books.ViewModels.GeneralViewModels;
 using World_of_books.Views.Windows.Authorization;
@@ -131,6 +132,8 @@ namespace World_of_books.ViewModels.Customer
             SessionData.CurrentUser.E_mall = _email;
             SessionData.CurrentUser.DateOfBirth = Convert.ToDateTime(_birthdayDate);
             SessionData.CurrentUser.NumberPhone = _numberPhone;
+
+            CourseworkEntities.Instance.SaveChanges();
         }
         #endregion
 
