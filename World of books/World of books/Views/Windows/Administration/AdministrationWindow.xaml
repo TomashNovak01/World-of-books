@@ -57,15 +57,15 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBox Text="{Binding Finding, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="10 0" materialDesign:HintAssist.Hint="Поиск" materialDesign:HintAssist.IsFloating="True"/>
-                        <ComboBox Grid.Column="1" VerticalAlignment="Bottom" SelectedIndex="0" SelectedItem="{Binding Role, UpdateSourceTrigger=PropertyChanged}" Margin="10 0">
+                        <ComboBox Grid.Column="1" VerticalAlignment="Bottom" SelectedIndex="{Binding Role, UpdateSourceTrigger=PropertyChanged}" Margin="10 0">
                             <ComboBoxItem Content="Все роли"/>
-                            <ComboBoxItem Content="Администраторы"/>
                             <ComboBoxItem Content="Клиенты"/>
+                            <ComboBoxItem Content="Администраторы"/>
                         </ComboBox>
                         <Button Content="Добавить" Command="{Binding OpenAddUserWindowCommand}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5 5"  Grid.Column="2"/>
                     </Grid>
 
-                    <ListView Margin="5 5" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding DisplayUsers}">
+                    <ListView Margin="5 5" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding DisplayUsers, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding ID}"/>
@@ -80,12 +80,6 @@
                                 <GridViewColumn Header="Номер телефона" Width="Auto" DisplayMemberBinding="{Binding NumberPhone}"/>
                             </GridView>
                         </ListView.View>
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Изменить пользователя"/>
-                                <MenuItem Header="Удалить пользователя"/>
-                            </ContextMenu>
-                        </ListView.ContextMenu>
                     </ListView>
                 </Grid>
             </TabItem>

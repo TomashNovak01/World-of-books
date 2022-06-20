@@ -76,8 +76,8 @@ namespace World_of_books.ViewModels.Administrator
         #endregion
 
         #region Role
-        private string _role = "Все роли";
-        public string Role
+        private int _role;
+        public int Role
         {
             get => _role;
             set
@@ -142,14 +142,14 @@ namespace World_of_books.ViewModels.Administrator
         {
             _displayUsers = CourseworkEntities.Instance.User.ToList();
 
-            if (_finding is var search && !string.IsNullOrEmpty(search))
-                _displayUsers = _displayUsers.Where(u => u.Lastname.Contains(search) ||
-                                                    u.Firstname.Contains(search) ||
+            if (_finding.ToLower() is var search && !string.IsNullOrEmpty(search))
+                _displayUsers = _displayUsers.Where(u => u.Lastname.ToLower().Contains(search) ||
+                                                    u.Firstname.ToLower().Contains(search) ||
                                                     u.Middlename != null &&
-                                                    u.Middlename.Contains(search)).ToList();
+                                                    u.Middlename.ToLower().Contains(search)).ToList();
 
-            if (_role != "System.Windows.Controls.ComboBoxItem: Все роли")
-                _displayUsers = _displayUsers.Where(u => u.Role.Name == _role.Replace("System.Windows.Controls.ComboBoxItem: ", "")).ToList();
+            if (_role != 0)
+                _displayUsers = _displayUsers.Where(u => u.IdRole == _role).ToList();
 
             if (_displayUsers.Count == 0)
                 MessageBox.Show("По вашему запросу товары не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -161,7 +161,7 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canChangeUserCommandExcute(object p) => true;
         private void _onChangeUserCommandExcuted(object p)
         {
-
+            MessageBox.Show("Change");
         }
         #endregion
 

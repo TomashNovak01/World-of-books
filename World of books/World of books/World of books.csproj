@@ -243,7 +243,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Res\Logo\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
