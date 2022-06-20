@@ -83,7 +83,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         
-                        <TextBox materialDesign:HintAssist.Hint="Поиск по названию или именам авторов" materialDesign:HintAssist.IsFloating="True" Grid.Column="0"  Margin="10 0"/>
+                        <TextBox materialDesign:HintAssist.Hint="Поиск по названию или именам авторов" materialDesign:HintAssist.IsFloating="True" Grid.Column="0" Margin="10 0"/>
                         <ComboBox Grid.Column="1" VerticalAlignment="Bottom" Margin="10 0"/>
                     </Grid>
 
