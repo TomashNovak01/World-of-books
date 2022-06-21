@@ -56,7 +56,7 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBox Text="{Binding Finding, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="10 0" materialDesign:HintAssist.Hint="Поиск" materialDesign:HintAssist.IsFloating="True"/>
+                        <TextBox Text="{Binding FindingUser, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="10 0" materialDesign:HintAssist.Hint="Поиск" materialDesign:HintAssist.IsFloating="True"/>
                         <ComboBox Grid.Column="1" VerticalAlignment="Bottom" SelectedIndex="{Binding Role, UpdateSourceTrigger=PropertyChanged}" Margin="10 0">
                             <ComboBoxItem Content="Все роли"/>
                             <ComboBoxItem Content="Клиенты"/>

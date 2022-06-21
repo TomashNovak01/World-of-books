@@ -62,14 +62,14 @@ namespace World_of_books.ViewModels.Administrator
         }
         #endregion
 
-        #region Finding
-        private string _finding;
-        public string Finding
+        #region FindingUser
+        private string _findingUser;
+        public string FindingUser
         {
-            get => _finding;
+            get => _findingUser;
             set
             {
-                Set(ref _finding, value);
+                Set(ref _findingUser, value);
                 FindUser();
             }
         }
@@ -84,6 +84,29 @@ namespace World_of_books.ViewModels.Administrator
             {
                 Set(ref _role, value);
                 FindUser();
+            }
+        }
+        #endregion
+        #endregion
+
+        #region All the books
+        #region DisplayBooks
+        private List<Book> _displayBooks = CourseworkEntities.Instance.Book.ToList();
+        public List<Book> DisplayBooks
+        {
+            get => _displayBooks;
+            set => Set(ref _displayBooks, value);
+        }
+        #endregion
+
+        #region FindingBook
+        private string _findingBook;
+        public string FindingBook
+        {
+            get => _findingBook;
+            set
+            {
+                Set(ref _findingBook, value);
             }
         }
         #endregion
@@ -140,18 +163,18 @@ namespace World_of_books.ViewModels.Administrator
         #region FindUser
         private void FindUser()
         {
-            _displayUsers = CourseworkEntities.Instance.User.ToList();
+            DisplayUsers = CourseworkEntities.Instance.User.ToList();
 
-            if (_finding.ToLower() is var search && !string.IsNullOrEmpty(search))
-                _displayUsers = _displayUsers.Where(u => u.Lastname.ToLower().Contains(search) ||
+            if (_findingUser.ToLower() is var search && !string.IsNullOrEmpty(search))
+                DisplayUsers = DisplayUsers.Where(u => u.Lastname.ToLower().Contains(search) ||
                                                     u.Firstname.ToLower().Contains(search) ||
                                                     u.Middlename != null &&
                                                     u.Middlename.ToLower().Contains(search)).ToList();
 
             if (_role != 0)
-                _displayUsers = _displayUsers.Where(u => u.IdRole == _role).ToList();
+                DisplayUsers = DisplayUsers.Where(u => u.IdRole == _role).ToList();
 
-            if (_displayUsers.Count == 0)
+            if (DisplayUsers.Count == 0)
                 MessageBox.Show("По вашему запросу товары не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
         #endregion
