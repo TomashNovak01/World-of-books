@@ -157,6 +157,8 @@ namespace World_of_books.ViewModels.Administrator
         {
             SessionData.CurrentDialogue = new AddUserWindow();
             SessionData.CurrentDialogue.ShowDialog();
+
+            FindUser();
         }
         #endregion
 
@@ -165,7 +167,7 @@ namespace World_of_books.ViewModels.Administrator
         {
             DisplayUsers = CourseworkEntities.Instance.User.ToList();
 
-            if (_findingUser.ToLower() is var search && !string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(_findingUser) && _findingUser.ToLower() is var search)
                 DisplayUsers = DisplayUsers.Where(u => u.Lastname.ToLower().Contains(search) ||
                                                     u.Firstname.ToLower().Contains(search) ||
                                                     u.Middlename != null &&
