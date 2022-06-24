@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewModel="clr-namespace:World_of_books.ViewModels.Administrator"
         mc:Ignorable="d"
-        Title="AddUserWindow" Height="800" Width="500" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner">
+        Height="800" Width="500" ResizeMode="CanMinimize" WindowStartupLocation="CenterOwner">
 
     <Window.DataContext>
         <viewModel:AddUserWindowViewModel/>
@@ -15,9 +15,7 @@
     
     <Grid HorizontalAlignment="Center">
         <StackPanel Orientation="Vertical" >
-            <TextBlock FontSize="20" TextAlignment="Center" FontWeight="Bold" Margin="0 10">
-                Добавление нового пользователя. <LineBreak/>Заполните поля.
-            </TextBlock>
+            <TextBlock Text="{Binding Title}" FontSize="20" TextAlignment="Center" FontWeight="Bold" Margin="0 10"/>
             <ScrollViewer>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">

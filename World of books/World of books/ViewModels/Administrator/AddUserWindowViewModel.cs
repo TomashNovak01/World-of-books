@@ -91,6 +91,15 @@ namespace World_of_books.ViewModels.Administrator
             set => Set(ref _numberPhone, value);
         }
         #endregion
+
+        #region Title
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set => Set(ref _title, value);
+        }
+        #endregion
         #endregion
 
         public AddUserWindowViewModel()

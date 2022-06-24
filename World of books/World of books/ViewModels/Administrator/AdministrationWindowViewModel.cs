@@ -70,7 +70,7 @@ namespace World_of_books.ViewModels.Administrator
             set
             {
                 Set(ref _findingUser, value);
-                FindUser();
+                UpdateUsersList();
             }
         }
         #endregion
@@ -83,7 +83,7 @@ namespace World_of_books.ViewModels.Administrator
             set
             {
                 Set(ref _role, value);
-                FindUser();
+                UpdateUsersList();
             }
         }
         #endregion
@@ -167,12 +167,12 @@ namespace World_of_books.ViewModels.Administrator
             SessionData.CurrentDialogue = new AddUserWindow();
             SessionData.CurrentDialogue.ShowDialog();
 
-            FindUser();
+            UpdateUsersList();
         }
         #endregion
 
-        #region FindUser
-        private void FindUser()
+        #region UpdateUsersList
+        private void UpdateUsersList()
         {
             DisplayUsers = CourseworkEntities.Instance.User.ToList();
 
@@ -204,7 +204,15 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canDeleteUserCommandExcute(object p) => true;
         private void _onDeleteUserCommandExcuted(object p)
         {
-            MessageBox.Show("Delete");
+            if (SelectedUser != null)
+            {
+                CourseworkEntities.Instance.User.Remove(SelectedUser);
+                CourseworkEntities.Instance.SaveChanges();
+
+                UpdateUsersList();
+            }
+            else
+                MessageBox.Show("Перед удалением, выберите пользователя", "Пользователь не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         #endregion
         #endregion
