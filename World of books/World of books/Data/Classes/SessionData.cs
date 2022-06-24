@@ -13,6 +13,14 @@ namespace World_of_books.Data.Classes
         public static User SelectedUser { get; set; }
         #endregion
 
+        #region SelectedBook
+        public static Book SelectedBook { get; set; }
+        #endregion
+
+        #region SelectedOrder
+        public static Order SelectedOrder { get; set; }
+        #endregion
+
         #region CurrentWindow
         private static Window _currentWindow;
         public static Window CurrentWindow
