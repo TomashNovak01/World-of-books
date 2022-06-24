@@ -65,7 +65,13 @@
                         <Button Content="Добавить" Command="{Binding OpenAddUserWindowCommand}" materialDesign:ButtonAssist.CornerRadius="15" Margin="5 5"  Grid.Column="2"/>
                     </Grid>
 
-                    <ListView Margin="5 5" HorizontalContentAlignment="Center" Grid.Row="1" ItemsSource="{Binding DisplayUsers, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView Margin="5 5" HorizontalContentAlignment="Center" Grid.Row="1" SelectedItem="{Binding SelectedUser}" ItemsSource="{Binding DisplayUsers, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Изменить" Command="{Binding ChangeUserCommand}" CommandParameter="{Binding}"/>
+                                <MenuItem Header="Удалить" Command="{Binding DeleteUserCommand}" CommandParameter="{Binding}"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding ID}"/>

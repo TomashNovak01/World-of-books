@@ -99,6 +99,15 @@ namespace World_of_books.ViewModels.Administrator
         }
         #endregion
 
+        #region SelectedUser
+        private User _selectedUser;
+        public User SelectedUser
+        {
+            get => _selectedUser;
+            set => Set(ref _selectedUser, value);
+        }
+        #endregion
+
         #region FindingBook
         private string _findingBook;
         public string FindingBook
@@ -195,7 +204,7 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canDeleteUserCommandExcute(object p) => true;
         private void _onDeleteUserCommandExcuted(object p)
         {
-
+            MessageBox.Show("Delete");
         }
         #endregion
         #endregion
