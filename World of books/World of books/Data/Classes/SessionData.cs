@@ -9,6 +9,10 @@ namespace World_of_books.Data.Classes
         public static User CurrentUser { get; set; }
         #endregion
 
+        #region SelectedUser
+        public static User SelectedUser { get; set; }
+        #endregion
+
         #region CurrentWindow
         private static Window _currentWindow;
         public static Window CurrentWindow

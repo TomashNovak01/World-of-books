@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
@@ -100,24 +102,76 @@ namespace World_of_books.ViewModels.Administrator
             set => Set(ref _title, value);
         }
         #endregion
+
+        #region TextOnButton
+        private string _textOnButton;
+        public string TextOnButton
+        {
+            get => _textOnButton;
+            set => Set(ref _textOnButton, value);
+        }
+        #endregion
+
+        #region RolesList
+        private List<Role> _rolesList = CourseworkEntities.Instance.Role.ToList();
+        public List<Role> RolesList
+        {
+            get => _rolesList;
+            set => Set(ref _rolesList, value);
+        }
+        #endregion
         #endregion
 
         public AddUserWindowViewModel()
         {
             #region Commands
-            CreateNewAccountCommand = new LambdaCommand(_onCreateNewAccountCommandExcuted, _canCreateNewAccountCommandExcute);
+            EditAndDeleteCheck();
+            ChangeUserDataCommand = new LambdaCommand(_onChangeUserDataCommandExcuted, _canChangeUserDataCommandExcute);
             #endregion
         }
 
         #region Commands
-        #region CreateNewAccountCommand
-        public ICommand CreateNewAccountCommand { get; }
-        private bool _canCreateNewAccountCommandExcute(object p) => true;
-        private void _onCreateNewAccountCommandExcuted(object p)
+        #region EditAndDeleteCheck
+        private void EditAndDeleteCheck()
+        {
+            if (SessionData.SelectedUser == null)
+            {
+                _title = "Заполните поля для создание нового пользователя";
+                _textOnButton = "Добавить нового пользователя";
+            }
+            else
+            {
+                _title = "Заполните поля для изменение пользователя";
+                _role = SessionData.SelectedUser.IdRole - 1;
+                _firstName = SessionData.SelectedUser.Firstname;
+                _lastName = SessionData.SelectedUser.Lastname;
+                _middleName = SessionData.SelectedUser.Middlename;
+                _password = SessionData.SelectedUser.Password;
+                _email = SessionData.SelectedUser.E_mall;
+                _gender = SessionData.SelectedUser.Gender;
+                _birthdayDate = SessionData.SelectedUser.DateOfBirth.ToString();
+                _numberPhone = SessionData.SelectedUser.NumberPhone;
+                _textOnButton = "Сохранить изменения";
+            }
+        }
+        #endregion
+
+        #region ChangeUserDataCommand
+        public ICommand ChangeUserDataCommand { get; }
+        private bool _canChangeUserDataCommandExcute(object p) => true;
+        private void _onChangeUserDataCommandExcuted(object p)
         {
             if (DataCheck.TryLastAndFirstNameAndPassword(_lastName, _firstName, _password) &&
                  DataCheck.TryEmail(_email) && DataCheck.TryNumberPhone(_numberPhone))
-                SaveData();
+            {
+                if (SessionData.SelectedUser == null)
+                    SaveData();
+                else
+                    ChangeUser();
+
+                SessionData.CurrentDialogue.Close();
+            }
+                
             else
                 DataCheck.ShowErrors();
         }
@@ -139,8 +193,21 @@ namespace World_of_books.ViewModels.Administrator
 
             CourseworkEntities.Instance.User.Add(newUser);
             CourseworkEntities.Instance.SaveChanges();
+        }
 
-            SessionData.CurrentDialogue.Close();
+        private void ChangeUser()
+        {
+            SessionData.SelectedUser.IdRole = _role + 1;
+            SessionData.SelectedUser.Firstname = _firstName;
+            SessionData.SelectedUser.Lastname = _lastName;
+            SessionData.SelectedUser.Middlename = _middleName;
+            SessionData.SelectedUser.Password = _password;
+            SessionData.SelectedUser.E_mall = _email;
+            SessionData.SelectedUser.Gender = _gender;
+            SessionData.SelectedUser.DateOfBirth = Convert.ToDateTime(_birthdayDate);
+            SessionData.SelectedUser.NumberPhone = _numberPhone;
+
+            CourseworkEntities.Instance.SaveChanges();
         }
         #endregion
         #endregion

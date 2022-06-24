@@ -164,6 +164,8 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canOpenAddUserWindowCommandExcute(object p) => true;
         private void _onOpenAddUserWindowCommandExcuted(object p)
         {
+            SessionData.SelectedUser = null;
+
             SessionData.CurrentDialogue = new AddUserWindow();
             SessionData.CurrentDialogue.ShowDialog();
 
@@ -195,7 +197,17 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canChangeUserCommandExcute(object p) => true;
         private void _onChangeUserCommandExcuted(object p)
         {
-            MessageBox.Show("Change");
+            if (SelectedUser != null)
+            {
+                SessionData.SelectedUser = _selectedUser;
+
+                SessionData.CurrentDialogue = new AddUserWindow();
+                SessionData.CurrentDialogue.ShowDialog();
+
+                UpdateUsersList();
+            }
+            else
+                MessageBox.Show("Перед изменением, выберите пользователя", "Пользователь не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         #endregion
 
