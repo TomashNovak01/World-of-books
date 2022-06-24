@@ -183,6 +183,9 @@
     <Compile Include="ViewModels\Customer\CustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModels\DataCheck.cs" />
     <Compile Include="ViewModels\UserControls\BookControlViewModel.cs" />
+    <Compile Include="Views\Windows\Administration\AddBookWindow.xaml.cs">
+      <DependentUpon>AddBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\Administration\AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
     </Compile>
@@ -258,6 +261,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Windows\Administration\AddBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\Administration\AddUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
