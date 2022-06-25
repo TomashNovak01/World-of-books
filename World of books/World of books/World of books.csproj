@@ -173,6 +173,8 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Administrator\AddAuthorWindowViewModel.cs" />
+    <Compile Include="ViewModels\Administrator\AddGenreOrTagViewModel.cs" />
     <Compile Include="ViewModels\Administrator\AddUserWindowViewModel.cs" />
     <Compile Include="ViewModels\Administrator\AdministrationWindowViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationAndRegistration\AuthorAndRegWindowViewModel.cs" />
@@ -183,8 +185,14 @@
     <Compile Include="ViewModels\Customer\CustomerWindowViewModel.cs" />
     <Compile Include="ViewModels\GeneralViewModels\DataCheck.cs" />
     <Compile Include="ViewModels\UserControls\BookControlViewModel.cs" />
+    <Compile Include="Views\Windows\Administration\AddAuthorWindow.xaml.cs">
+      <DependentUpon>AddAuthorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\Administration\AddBookWindow.xaml.cs">
       <DependentUpon>AddBookWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Administration\AddGenreOrTagWindow.xaml.cs">
+      <DependentUpon>AddGenreOrTagWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\Administration\AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
@@ -261,7 +269,15 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Windows\Administration\AddAuthorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\Administration\AddBookWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Administration\AddGenreOrTagWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
