@@ -122,10 +122,10 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Content="Добавить книгу" Command="{Binding SaveChangesCommand}" materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="0" Margin="10 0"/>
-                        <Button Content="Добавить жанр" Command="{Binding SaveChangesCommand}" materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="1" Margin="10 0"/>
-                        <Button Content="Добавить тэг" Command="{Binding SaveChangesCommand}" materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="2" Margin="10 0"/>
-                        <Button Content="Сформировать документ" Command="{Binding SaveChangesCommand}" materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="3" Margin="10 0"/>
+                        <Button Content="Добавить книгу" Command="{Binding OpenAddBookWindowCommand}" materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="0" Margin="10 0"/>
+                        <Button Content="Добавить жанр" Command="{Binding OpenAddGenreOrTagWindowCommand}" materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="1" Margin="10 0"/>
+                        <Button Content="Добавить тэг" Command="{Binding OpenAddGenreOrTagWindowCommand}" materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="2" Margin="10 0"/>
+                        <Button Content="Сформировать документ"  materialDesign:ButtonAssist.CornerRadius="15" Grid.Column="3" Margin="10 0"/>
                     </Grid>
                 </Grid>
 

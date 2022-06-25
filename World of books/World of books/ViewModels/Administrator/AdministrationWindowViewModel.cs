@@ -236,6 +236,8 @@ namespace World_of_books.ViewModels.Administrator
             OpenAddBookWindowCommand = new LambdaCommand(_onOpenAddBookWindowCommandExcuted, _canOpenAddBookWindowCommandExcute);
             ChangeBookCommand = new LambdaCommand(_onChangeBookCommandExcuted, _canChangeBookCommandExcute);
             DeleteBookCommand = new LambdaCommand(_onDeleteBookCommandExcuted, _canDeleteBookCommandExcute);
+
+            OpenAddGenreOrTagWindowCommand = new LambdaCommand(_onOpenAddGenreOrTagWindowCommandExcuted, _canOpenAddGenreOrTagWindowCommandExcute);
             #endregion
             #endregion
         }
@@ -350,6 +352,8 @@ namespace World_of_books.ViewModels.Administrator
         #region FillLists
         private void FillGenresList()
         {
+            _genresList.Clear();
+
             _genresList.Add(new Genre() { Title = "Все жанры" });
             foreach (var genre in CourseworkEntities.Instance.Genre)
                 _genresList.Add(genre);
@@ -357,6 +361,8 @@ namespace World_of_books.ViewModels.Administrator
 
         private void FillTagsList()
         {
+            _tagsList.Clear();
+
             _tagsList.Add(new Tag() { Title = "Все тэги" });
             foreach (var tag in CourseworkEntities.Instance.Tag)
                 _tagsList.Add(tag);
@@ -364,6 +370,8 @@ namespace World_of_books.ViewModels.Administrator
 
         private void FillAuthorList()
         {
+            _authorsList.Clear();
+
             _authorsList.Add(new Author() { Lastname = "Все авторы" });
             foreach (var author in CourseworkEntities.Instance.Author)
                 _authorsList.Add(author);
@@ -394,6 +402,19 @@ namespace World_of_books.ViewModels.Administrator
             SessionData.CurrentDialogue.ShowDialog();
 
             UpdateBooksList();
+        }
+        #endregion
+
+        #region OpenAddGenreOrTagWindowCommand
+        public ICommand OpenAddGenreOrTagWindowCommand { get; }
+        private bool _canOpenAddGenreOrTagWindowCommandExcute(object p) => true;
+        private void _onOpenAddGenreOrTagWindowCommandExcuted(object p)
+        {
+            SessionData.CurrentDialogue = new AddGenreOrTagWindow();
+            SessionData.CurrentDialogue.ShowDialog();
+
+            FillGenresList();
+            FillTagsList();
         }
         #endregion
 
