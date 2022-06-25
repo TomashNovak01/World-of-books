@@ -4,9 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Administration"
+        xmlns:viewModel="clr-namespace:World_of_books.ViewModels.Administrator"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AddGenreOrTagWindow" Height="450" Width="800">
+        Height="300" Width="400" ResizeMode="CanMinimize">
+
+    <Window.DataContext>
+        <viewModel:AddGenreOrTagViewModel/>
+    </Window.DataContext>
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="{Binding Header}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" FontSize="20"/>
+        <ComboBox SelectedIndex="{Binding GenreOrTag, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="15 0">
+            <ComboBoxItem Content="(Пусто)"/>
+            <ComboBoxItem Content="Жанр"/>
+            <ComboBoxItem Content="Тег"/>
+        </ComboBox>
+        <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Margin="15 0" materialDesign:HintAssist.Hint="Введите название" Grid.Row="2" VerticalAlignment="Center" FontSize="20"/>
+        <Button Content="Сохранить" Command="{Binding AddItemCommand, UpdateSourceTrigger=PropertyChanged}" Margin="15 0" Grid.Row="3" materialDesign:ButtonAssist.CornerRadius="15"/>
     </Grid>
 </Window>
