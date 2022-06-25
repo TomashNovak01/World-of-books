@@ -30,5 +30,10 @@ namespace World_of_books.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Book { get; set; }
+
+        public string FullName
+        {
+            get => $"{Lastname} {Firstname} {Middlename}";
+        }
     }
 }
