@@ -395,8 +395,6 @@ namespace World_of_books.ViewModels.Administrator
             if (!string.IsNullOrEmpty(_findingBook) && _findingBook.ToLower() is var search)
                 DisplayBooks = DisplayBooks.Where(b => b.Title.ToLower().Contains(search) ||
                                                     b.Summary.ToLower().Contains(search)).ToList();
-            if (_idGenre != 0)
-                DisplayBooks = DisplayBooks.Where(b => b.Genre == _selectedGenre).ToList();
 
             if (DisplayUsers.Count == 0)
                 MessageBox.Show("По вашему запросу книги не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
