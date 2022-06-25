@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using World_of_books.Data.Classes;
 using World_of_books.Infrastructures.Commands;
 using World_of_books.Models;
 using World_of_books.ViewModels.Base;
@@ -9,15 +10,6 @@ namespace World_of_books.ViewModels.Administrator
     internal class AddGenreOrTagViewModel : ViewModelBase
     {
         #region Fields
-        #region Header
-        private string _header;
-        public string Header
-        {
-            get => _header;
-            set => Set(ref _header, value);
-        }
-        #endregion
-
         #region Title
         private string _title;
         public string Title
@@ -48,7 +40,7 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canAddItemCommandExcute(object p) => true;
         private void _onAddItemCommandExcuted(object p)
         {
-            if (_genreOrTag != 0 || !string.IsNullOrEmpty(_title))
+            if (_genreOrTag != 0 && !string.IsNullOrEmpty(_title))
             {
                 if (_genreOrTag == 1)
                     CourseworkEntities.Instance.Genre.Add(new Genre() { Title = _title });
@@ -56,6 +48,8 @@ namespace World_of_books.ViewModels.Administrator
                     CourseworkEntities.Instance.Tag.Add(new Tag() { Title = _title });
 
                 CourseworkEntities.Instance.SaveChanges();
+
+                SessionData.CurrentDialogue.Close();
             }
             else
                 MessageBox.Show("Заполните поля", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

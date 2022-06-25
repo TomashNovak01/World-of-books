@@ -21,8 +21,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding Header}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" FontSize="20"/>
-        <ComboBox SelectedIndex="{Binding GenreOrTag, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Margin="15 0">
+        <TextBlock Text="Заполните поля" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" FontSize="20"/>
+        <ComboBox SelectedIndex="{Binding GenreOrTag, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Grid.Row="1" Margin="15 0">
             <ComboBoxItem Content="(Пусто)"/>
             <ComboBoxItem Content="Жанр"/>
             <ComboBoxItem Content="Тег"/>
