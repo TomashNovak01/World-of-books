@@ -62,16 +62,21 @@ namespace World_of_books.ViewModels.Administrator
         }
         #endregion
 
-        #region FindingUser
-        private string _findingUser;
-        public string FindingUser
+        #region SelectedUser
+        private User _selectedUser;
+        public User SelectedUser
         {
-            get => _findingUser;
-            set
-            {
-                Set(ref _findingUser, value);
-                UpdateUsersList();
-            }
+            get => _selectedUser;
+            set => Set(ref _selectedUser, value);
+        }
+        #endregion
+
+        #region RolesList
+        private List<Role> _rolesList = new List<Role>();
+        public List<Role> RolesList
+        {
+            get => _rolesList;
+            set => Set(ref _rolesList, value);
         }
         #endregion
 
@@ -83,6 +88,19 @@ namespace World_of_books.ViewModels.Administrator
             set
             {
                 Set(ref _role, value);
+                UpdateUsersList();
+            }
+        }
+        #endregion
+
+        #region FindingUser
+        private string _findingUser;
+        public string FindingUser
+        {
+            get => _findingUser;
+            set
+            {
+                Set(ref _findingUser, value);
                 UpdateUsersList();
             }
         }
@@ -99,12 +117,12 @@ namespace World_of_books.ViewModels.Administrator
         }
         #endregion
 
-        #region SelectedUser
-        private User _selectedUser;
-        public User SelectedUser
+        #region SelectedBook
+        private Book _selectedBook;
+        public Book SelectedBook
         {
-            get => _selectedUser;
-            set => Set(ref _selectedUser, value);
+            get => _selectedBook;
+            set => Set(ref _selectedBook, value);
         }
         #endregion
 
@@ -116,8 +134,81 @@ namespace World_of_books.ViewModels.Administrator
             set
             {
                 Set(ref _findingBook, value);
+                UpdateBooksList();
             }
         }
+        #endregion
+
+        #region Authors
+        #region IdAuthor
+        private int _idAuthor;
+        public int IdAuthor
+        {
+            get => _idAuthor;
+            set
+            {
+                Set(ref _idAuthor, value);
+                UpdateBooksList();
+            }
+        }
+        #endregion
+
+        #region AuthorsList
+        private List<Author> _authorsList = new List<Author>();
+        public List<Author> AuthorsList
+        {
+            get => _authorsList;
+            set => Set(ref _authorsList, value);
+        }
+        #endregion
+        #endregion
+
+        #region Genre
+        #region IdGenre
+        private int _idGenre;
+        public int IdGenre
+        {
+            get => _idGenre;
+            set
+            {
+                Set(ref _idGenre, value);
+                UpdateBooksList();
+            }
+        }
+        #endregion
+
+        #region GenresList
+        private List<Genre> _genresList = new List<Genre>();
+        public List<Genre> GenresList
+        {
+            get => _genresList;
+            set => Set(ref _genresList, value);
+        }
+        #endregion
+        #endregion
+
+        #region Tags
+        #region IdTag
+        private int _idTag;
+        public int IdTag
+        {
+            get => _idTag;
+            set
+            {
+                Set(ref _idTag, value);
+                UpdateBooksList();
+            }
+        }
+        #endregion
+
+        #region TagsList
+        private List<Tag> _tagsList = new List<Tag>();
+        public List<Tag> TagsList
+        {
+            get => _tagsList;
+            set => Set(ref _tagsList, value);
+        }
+        #endregion
         #endregion
         #endregion
         #endregion
@@ -125,15 +216,32 @@ namespace World_of_books.ViewModels.Administrator
         public AdministrationWindowViewModel()
         {
             #region Commands
+            #region Account
             SaveChangesCommand = new LambdaCommand(_onSaveChangesCommandExcuted, _canSaveChangesCommandExcute);
-            OpenAddUserWindowCommand = new LambdaCommand(_onOpenAddUserWindowCommandExcuted, _canOpenAddUserWindowCommandExcute);
+            #endregion
 
+            #region All the accounts
+            FillRolesList();
+
+            OpenAddUserWindowCommand = new LambdaCommand(_onOpenAddUserWindowCommandExcuted, _canOpenAddUserWindowCommandExcute);
             ChangeUserCommand = new LambdaCommand(_onChangeUserCommandExcuted, _canChangeUserCommandExcute);
             DeleteUserCommand = new LambdaCommand(_onDeleteUserCommandExcuted, _canDeleteUserCommandExcute);
+            #endregion
+
+            #region All the books
+            FillAuthorList();
+            FillGenresList();
+            FillTagsList();
+
+            OpenAddBookWindowCommand = new LambdaCommand(_onOpenAddBookWindowCommandExcuted, _canOpenAddBookWindowCommandExcute);
+            ChangeBookCommand = new LambdaCommand(_onChangeBookCommandExcuted, _canChangeBookCommandExcute);
+            DeleteBookCommand = new LambdaCommand(_onDeleteBookCommandExcuted, _canDeleteBookCommandExcute);
+            #endregion
             #endregion
         }
 
         #region Commands
+        #region Account
         #region SaveChangesCommand
         public ICommand SaveChangesCommand { get; }
         private bool _canSaveChangesCommandExcute(object p) => true;
@@ -158,6 +266,15 @@ namespace World_of_books.ViewModels.Administrator
             CourseworkEntities.Instance.SaveChanges();
         }
         #endregion
+        #endregion
+
+        #region All the accounts
+        private void FillRolesList()
+        {
+            _rolesList.Add(new Role() { Name = "Все роли" });
+            foreach (var role in CourseworkEntities.Instance.Role)
+                _rolesList.Add(role);
+        }
 
         #region OpenAddUserWindowCommand
         public ICommand OpenAddUserWindowCommand { get; }
@@ -188,7 +305,7 @@ namespace World_of_books.ViewModels.Administrator
                 DisplayUsers = DisplayUsers.Where(u => u.IdRole == _role).ToList();
 
             if (DisplayUsers.Count == 0)
-                MessageBox.Show("По вашему запросу товары не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("По вашему запросу пользователи не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
         #endregion
 
@@ -226,6 +343,95 @@ namespace World_of_books.ViewModels.Administrator
             else
                 MessageBox.Show("Перед удалением, выберите пользователя", "Пользователь не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+        #endregion
+        #endregion
+
+        #region All the books
+        #region FillLists
+        private void FillGenresList()
+        {
+            _genresList.Add(new Genre() { Title = "Все жанры" });
+            foreach (var genre in CourseworkEntities.Instance.Genre)
+                _genresList.Add(genre);
+        }
+
+        private void FillTagsList()
+        {
+            _tagsList.Add(new Tag() { Title = "Все тэги" });
+            foreach (var tag in CourseworkEntities.Instance.Tag)
+                _tagsList.Add(tag);
+        }
+
+        private void FillAuthorList()
+        {
+            _authorsList.Add(new Author() { Lastname = "Все авторы" });
+            foreach (var author in CourseworkEntities.Instance.Author)
+                _authorsList.Add(author);
+        }
+        #endregion
+
+        private void UpdateBooksList()
+        {
+            DisplayBooks = CourseworkEntities.Instance.Book.ToList();
+
+            if (!string.IsNullOrEmpty(_findingBook) && _findingBook.ToLower() is var search)
+                DisplayBooks = DisplayBooks.Where(b => b.Title.ToLower().Contains(search) ||
+                                                    b.Summary.ToLower().Contains(search)).ToList();
+           // Сортировка по ComboBox
+
+            if (DisplayUsers.Count == 0)
+                MessageBox.Show("По вашему запросу книги не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        #region OpenAddBookWindowCommand
+        public ICommand OpenAddBookWindowCommand { get; }
+        private bool _canOpenAddBookWindowCommandExcute(object p) => true;
+        private void _onOpenAddBookWindowCommandExcuted(object p)
+        {
+            SessionData.SelectedBook = null;
+
+            SessionData.CurrentDialogue = new AddBookWindow();
+            SessionData.CurrentDialogue.ShowDialog();
+
+            UpdateBooksList();
+        }
+        #endregion
+
+        #region ChangeBookCommand
+        public ICommand ChangeBookCommand { get; }
+        private bool _canChangeBookCommandExcute(object p) => true;
+        private void _onChangeBookCommandExcuted(object p)
+        {
+            if (SelectedUser != null)
+            {
+                SessionData.SelectedUser = _selectedUser;
+
+                SessionData.CurrentDialogue = new AddBookWindow();
+                SessionData.CurrentDialogue.ShowDialog();
+
+                UpdateBooksList();
+            }
+            else
+                MessageBox.Show("Перед изменением, выберите книгу", "Книга не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        #endregion
+
+        #region DeleteBookCommand
+        public ICommand DeleteBookCommand { get; }
+        private bool _canDeleteBookCommandExcute(object p) => true;
+        private void _onDeleteBookCommandExcuted(object p)
+        {
+            if (SelectedBook != null)
+            {
+                CourseworkEntities.Instance.Book.Remove(SelectedBook);
+                CourseworkEntities.Instance.SaveChanges();
+
+                UpdateBooksList();
+            }
+            else
+                MessageBox.Show("Перед удалением, выберите книгу", "Пользователь не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        #endregion
         #endregion
         #endregion
     }
