@@ -177,6 +177,15 @@ namespace World_of_books.ViewModels.Administrator
         }
         #endregion
 
+        #region SelectedGenre
+        private Genre _selectedGenre;
+        public Genre SelectedGenre
+        {
+            get => _selectedGenre;
+            set => Set(ref _selectedGenre, value);
+        }
+        #endregion
+
         #region GenresList
         private List<Genre> _genresList = new List<Genre>();
         public List<Genre> GenresList
@@ -385,7 +394,8 @@ namespace World_of_books.ViewModels.Administrator
             if (!string.IsNullOrEmpty(_findingBook) && _findingBook.ToLower() is var search)
                 DisplayBooks = DisplayBooks.Where(b => b.Title.ToLower().Contains(search) ||
                                                     b.Summary.ToLower().Contains(search)).ToList();
-           // Сортировка по ComboBox
+            if (_idGenre != 0)
+                DisplayBooks = DisplayBooks.Where(b => b.Genre == _selectedGenre).ToList();
 
             if (DisplayUsers.Count == 0)
                 MessageBox.Show("По вашему запросу книги не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);

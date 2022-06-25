@@ -110,7 +110,27 @@
 
                     <Grid Grid.Row="1">
                         <ListView Margin="5 5" ItemsSource="{Binding DisplayBooks, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBook, UpdateSourceTrigger=PropertyChanged}">
-                            
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Изменить" Command="{Binding }" CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Удалить" Command="{Binding }" CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding ID}"/>
+                                    <GridViewColumn Header="Издатель" Width="Auto" DisplayMemberBinding="{Binding PublishingHouse.Title}"/>
+                                    <GridViewColumn Header="Название" Width="Auto" DisplayMemberBinding="{Binding Title}"/>
+                                    <GridViewColumn Header="Описание" Width="130" DisplayMemberBinding="{Binding Summary}"/>
+                                    <GridViewColumn Header="Рейтинг" Width="Auto" DisplayMemberBinding="{Binding Rating}"/>
+                                    <GridViewColumn Header="Дата публикации" Width="Auto" DisplayMemberBinding="{Binding Publication_date}"/>
+                                    <GridViewColumn Header="Количество копий на складе" Width="Auto" DisplayMemberBinding="{Binding NumberOfBooksLeftInStock}"/>
+                                    <GridViewColumn Header="Цена" Width="Auto" DisplayMemberBinding="{Binding Cost}"/>
+                                    <GridViewColumn Header="Жанр" Width="Auto" DisplayMemberBinding="{Binding Genre.IsReadOnly}"/>
+                                    <GridViewColumn Header="Автор" Width="Auto" DisplayMemberBinding="{Binding Author}"/>
+                                    <GridViewColumn Header="Тэг" Width="Auto" DisplayMemberBinding="{Binding Tag}"/>
+                                </GridView>
+                            </ListView.View>
                         </ListView>
                     </Grid>
 
