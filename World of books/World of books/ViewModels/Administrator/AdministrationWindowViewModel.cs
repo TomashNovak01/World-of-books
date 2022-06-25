@@ -247,6 +247,7 @@ namespace World_of_books.ViewModels.Administrator
             DeleteBookCommand = new LambdaCommand(_onDeleteBookCommandExcuted, _canDeleteBookCommandExcute);
 
             OpenAddGenreOrTagWindowCommand = new LambdaCommand(_onOpenAddGenreOrTagWindowCommandExcuted, _canOpenAddGenreOrTagWindowCommandExcute);
+            OpenAddAuthorWindowCommand = new LambdaCommand(_onOpenAddAuthorWindowCommandExcuted, _canOpenAddAuthorWindowCommandExcute);
             #endregion
             #endregion
         }
@@ -425,6 +426,18 @@ namespace World_of_books.ViewModels.Administrator
 
             FillGenresList();
             FillTagsList();
+        }
+        #endregion
+
+        #region OpenAddAuthorWindowCommand
+        public ICommand OpenAddAuthorWindowCommand { get; }
+        private bool _canOpenAddAuthorWindowCommandExcute(object p) => true;
+        private void _onOpenAddAuthorWindowCommandExcuted(object p)
+        {
+            SessionData.CurrentDialogue = new AddAuthorWindow();
+            SessionData.CurrentDialogue.ShowDialog();
+
+            FillAuthorList();
         }
         #endregion
 

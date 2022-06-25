@@ -21,13 +21,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 25">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Добро пожаловать  " FontSize="24" FontWeight="Bold"/>
-                <TextBlock Text="{Binding UserName}" FontSize="24" FontWeight="Bold" TextWrapping="Wrap"/>
-                
-            </StackPanel>
+            <TextBlock Text="Добро пожаловать" FontSize="24" FontWeight="Bold"/>
+            <TextBlock Text="{Binding UserName}" FontSize="24" FontWeight="Bold" TextWrapping="Wrap"/>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Вы зашли как " Margin="0,15" FontSize="18"/>
                 <TextBlock Text="{Binding UserRole}" Margin="0,15" FontSize="18"/>                
             </StackPanel>
