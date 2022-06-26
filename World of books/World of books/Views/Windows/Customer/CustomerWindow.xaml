@@ -15,12 +15,7 @@
     
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Файл">
-                <MenuItem Header="Выход" Command="{Binding OpenStartWindowCommand}"/>
-            </MenuItem>
-            <MenuItem Header="О программе">
-                
-            </MenuItem>
+            
         </Menu>
 
         <StatusBar DockPanel.Dock="Bottom">
@@ -70,31 +65,80 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
+
             <TabItem Header="Все книги">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
-                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="8*"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBox materialDesign:HintAssist.Hint="Поиск по названию или именам авторов" materialDesign:HintAssist.IsFloating="True" Grid.Column="0" Margin="10 0"/>
-                        <ComboBox Grid.Column="1" VerticalAlignment="Bottom" Margin="10 0"/>
+
+                        <TextBox Text="{Binding FindingBook, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="10 0" materialDesign:HintAssist.Hint="Поиск по названию и описанию" materialDesign:HintAssist.IsFloating="True" VerticalAlignment="Bottom"/>
+                        <ComboBox ItemsSource="{Binding AuthorsList, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedIndex="{Binding IdAuthor, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Bottom" Margin="10 0"/>
+                        <ComboBox ItemsSource="{Binding GenresList, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Title" SelectedIndex="{Binding IdGenre, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" VerticalAlignment="Bottom" Margin="10 0"/>
+                        <ComboBox ItemsSource="{Binding TagsList, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Title" SelectedIndex="{Binding IdTag, UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" VerticalAlignment="Bottom" Margin="10 0"/>
                     </Grid>
 
-                    <ListView Grid.Row="1" HorizontalContentAlignment="Center"/>
+                    <Grid Grid.Row="1">
+                        <ListView Margin="5 5" ItemsSource="{Binding DisplayBooks, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedBook, UpdateSourceTrigger=PropertyChanged}">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Добавить в корзину" Command="{Binding AddBookInBasketCommand}" CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Издатель" Width="Auto" DisplayMemberBinding="{Binding PublishingHouse.Title}"/>
+                                    <GridViewColumn Header="Название" Width="Auto" DisplayMemberBinding="{Binding Title}"/>
+                                    <GridViewColumn Header="Описание" Width="130" DisplayMemberBinding="{Binding Summary}"/>
+                                    <GridViewColumn Header="Рейтинг" Width="Auto" DisplayMemberBinding="{Binding Rating}"/>
+                                    <GridViewColumn Header="Дата публикации" Width="Auto" DisplayMemberBinding="{Binding Publication_date}"/>
+                                    <GridViewColumn Header="Количество копий на складе" Width="Auto" DisplayMemberBinding="{Binding NumberOfBooksLeftInStock}"/>
+                                    <GridViewColumn Header="Цена" Width="Auto" DisplayMemberBinding="{Binding Cost}"/>
+                                    <GridViewColumn Header="Жанр" Width="Auto" DisplayMemberBinding="{Binding Genre.IsReadOnly}"/>
+                                    <GridViewColumn Header="Автор" Width="Auto" DisplayMemberBinding="{Binding Author}"/>
+                                    <GridViewColumn Header="Тэг" Width="Auto" DisplayMemberBinding="{Binding Tag}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Заказ">
-                
-            </TabItem>
-            <TabItem Header="Мои книги">
-                
+            
+            <TabItem Header="Корзина">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView Margin="5 5" ItemsSource="{Binding ShopingCart, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedInBook, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Удалить из корзины" Command="{Binding DeleteBookFromBasketCommand}" CommandParameter="{Binding}"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Издатель" Width="Auto" DisplayMemberBinding="{Binding PublishingHouse.Title}"/>
+                                <GridViewColumn Header="Название" Width="Auto" DisplayMemberBinding="{Binding Title}"/>
+                                <GridViewColumn Header="Описание" Width="Auto" DisplayMemberBinding="{Binding Summary}"/>
+                                <GridViewColumn Header="Количество копий на складе" Width="Auto" DisplayMemberBinding="{Binding NumberOfBooksLeftInStock}"/>
+                                <GridViewColumn Header="Цена" Width="Auto" DisplayMemberBinding="{Binding Cost}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Button Content="Заказать" Command="{Binding FormOrderCommand}" materialDesign:ButtonAssist.CornerRadius="15" Margin="25 0" Grid.Row="1"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
