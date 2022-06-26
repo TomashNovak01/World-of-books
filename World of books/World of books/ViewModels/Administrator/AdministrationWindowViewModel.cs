@@ -396,6 +396,15 @@ namespace World_of_books.ViewModels.Administrator
                 DisplayBooks = DisplayBooks.Where(b => b.Title.ToLower().Contains(search) ||
                                                     b.Summary.ToLower().Contains(search)).ToList();
 
+            if (_idAuthor != 0)
+                DisplayBooks = DisplayBooks.Where(b => b.Author.Any(a => a.ID == _idAuthor)).ToList();
+
+            if (_idGenre != 0)
+                DisplayBooks = DisplayBooks.Where(b => b.Genre.Any(a => a.ID == _idGenre)).ToList();
+
+            if (_idTag != 0)
+                DisplayBooks = DisplayBooks.Where(b => b.Tag.Any(t => t.Id == _idTag)).ToList();
+
             if (DisplayUsers.Count == 0)
                 MessageBox.Show("По вашему запросу книги не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
@@ -444,9 +453,9 @@ namespace World_of_books.ViewModels.Administrator
         private bool _canChangeBookCommandExcute(object p) => true;
         private void _onChangeBookCommandExcuted(object p)
         {
-            if (SelectedUser != null)
+            if (SelectedBook != null)
             {
-                SessionData.SelectedUser = _selectedUser;
+                SessionData.SelectedBook = _selectedBook;
 
                 SessionData.CurrentDialogue = new AddBookWindow();
                 SessionData.CurrentDialogue.ShowDialog();

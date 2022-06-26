@@ -88,10 +88,25 @@ namespace World_of_books.ViewModels.Administrator
 
         public AddBookWindowViewModel()
         {
+            FillFields();
             SaveDataChangeCommand = new LambdaCommand(_onSaveDataChangeCommandExcuted, _canSaveDataChangeCommandExcute);
         }
 
         #region Commands
+        private void FillFields()
+        {
+            if (SessionData.SelectedBook != null)
+            {
+                _publishingHouse = SessionData.SelectedBook.PublishingHouse;
+                _title = SessionData.SelectedBook.Title;
+                _summary = SessionData.SelectedBook.Summary;
+                _rating = SessionData.SelectedBook.Rating.ToString();
+                _dateOfPublish = SessionData.SelectedBook.Publication_date;
+                _numberOfBooksLeftInStock = SessionData.SelectedBook.NumberOfBooksLeftInStock.ToString();
+                _cost = SessionData.SelectedBook.Cost.ToString();
+            }
+        }
+
         #region SaveDataChangeCommand
         public ICommand SaveDataChangeCommand { get; }
         private bool _canSaveDataChangeCommandExcute(object p) => true;
