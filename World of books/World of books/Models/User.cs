@@ -36,5 +36,10 @@ namespace World_of_books.Models
         public virtual Role Role { get; set; }
 
         public static User CurrentUser { get; set; }
+
+        public string FullName
+        {
+            get => $"{Lastname} {Firstname} {Middlename}";
+        }
     }
 }
