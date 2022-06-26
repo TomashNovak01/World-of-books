@@ -176,6 +176,7 @@
     <Compile Include="ViewModels\Administrator\AddAuthorWindowViewModel.cs" />
     <Compile Include="ViewModels\Administrator\AddBookWindowViewModel.cs" />
     <Compile Include="ViewModels\Administrator\AddGenreOrTagViewModel.cs" />
+    <Compile Include="ViewModels\Administrator\AddOrderWindowViewModel.cs" />
     <Compile Include="ViewModels\Administrator\AddUserWindowViewModel.cs" />
     <Compile Include="ViewModels\Administrator\AdministrationWindowViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationAndRegistration\AuthorAndRegWindowViewModel.cs" />
@@ -194,6 +195,9 @@
     </Compile>
     <Compile Include="Views\Windows\Administration\AddGenreOrTagWindow.xaml.cs">
       <DependentUpon>AddGenreOrTagWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Administration\AddOrderWindow.xaml.cs">
+      <DependentUpon>AddOrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\Administration\AddUserWindow.xaml.cs">
       <DependentUpon>AddUserWindow.xaml</DependentUpon>
@@ -279,6 +283,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\Administration\AddGenreOrTagWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Administration\AddOrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

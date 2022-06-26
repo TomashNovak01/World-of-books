@@ -34,7 +34,7 @@
         <TextBox Text="{Binding Summary}" materialDesigh:HintAssist.Hint="Описание" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="3"/>
         <TextBox Text="{Binding Rating}" materialDesigh:HintAssist.Hint="Рейтинг" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="4"/>
 
-        <DatePicker Text="{Binding DateOfPublish}" FontSize="20" Margin="15 0" Grid.Row="5"/>
+        <DatePicker SelectedDate="{Binding DateOfPublish}" FontSize="20" Margin="15 0" Grid.Row="5"/>
 
         <TextBox Text="{Binding NumberOfBooksLeftInStock}" materialDesigh:HintAssist.Hint="Количество книг на складе" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="6"/>
         <TextBox Text="{Binding Cost}" materialDesigh:HintAssist.Hint="Цена" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="7"/>

@@ -151,7 +151,52 @@
             </TabItem>
 
             <TabItem Header="Все заказы">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox ItemsSource="{Binding CustomersList, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FullName" SelectedIndex="{Binding IdUser, UpdateSourceTrigger=PropertyChanged}" Margin="15 0" Grid.Column="0"/>
+                        <DatePicker SelectedDate="{Binding SelectedDate}" Margin="15 0" Grid.Column="1"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <ListView Margin="5 5" ItemsSource="{Binding DisplayOrder, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrder, UpdateSourceTrigger=PropertyChanged}">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Изменить" Command="{Binding ChangeOrderCommand}" CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Удалить" Command="{Binding DeleteOrderCommand}" CommandParameter="{Binding}"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding ID}"/>
+                                    <GridViewColumn Header="Клиент" Width="Auto" DisplayMemberBinding="{Binding User.FullName}"/>
+                                    <GridViewColumn Header="Дата заказа" Width="Auto" DisplayMemberBinding="{Binding DateOfOrder}"/>
+                                    <GridViewColumn Header="Цена" Width="Auto" DisplayMemberBinding="{Binding OrderPrice}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Content="Добавить заказ" Command="{Binding OpenAddOrderWindowCommand}" materialDesign:ButtonAssist.CornerRadius="15" Margin="15 0" Grid.Column="0"/>
+                        <Button Content="Сформировать" materialDesign:ButtonAssist.CornerRadius="15" Margin="15 0" Grid.Column="1"/>
+                    </Grid>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>

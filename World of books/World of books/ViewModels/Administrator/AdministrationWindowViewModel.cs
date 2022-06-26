@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -220,6 +221,66 @@ namespace World_of_books.ViewModels.Administrator
         #endregion
         #endregion
         #endregion
+
+        #region All the orders
+        #region Constants
+        public const int CUSTOMER_ROLE = 1;
+        public const int ADMINISTRATION_ROLE = 2;
+        #endregion
+
+        #region CustomersList
+        private List<User> _customersList = new List<User>();
+        public List<User> CustomersList
+        {
+            get => _customersList;
+            set => Set(ref _customersList, value);
+        }
+        #endregion
+
+        #region IdUser
+        private int _idUser;
+        public int IdUser
+        {
+            get => _idUser;
+            set 
+            { 
+                Set(ref _idUser, value);
+                UpdateOrdersList();
+            }
+        }
+        #endregion
+
+        #region SelectedDate
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
+        {
+            get => _selectedDate;
+            set
+            {
+                Set(ref _selectedDate, value);
+                UpdateOrdersList();
+            }
+        }
+        #endregion
+
+        #region DisplayOrders
+        private List<Order> _displayOrder = CourseworkEntities.Instance.Order.ToList();
+        public List<Order> DisplayOrder
+        {
+            get => _displayOrder;
+            set => Set(ref _displayOrder, value);
+        }
+        #endregion
+
+        #region SelectedOrder
+        private Order _selectedOrder;
+        public Order SelectedOrder
+        {
+            get => _selectedOrder;
+            set => Set(ref _selectedOrder, value);
+        }
+        #endregion
+        #endregion
         #endregion
 
         public AdministrationWindowViewModel()
@@ -248,6 +309,14 @@ namespace World_of_books.ViewModels.Administrator
 
             OpenAddGenreOrTagWindowCommand = new LambdaCommand(_onOpenAddGenreOrTagWindowCommandExcuted, _canOpenAddGenreOrTagWindowCommandExcute);
             OpenAddAuthorWindowCommand = new LambdaCommand(_onOpenAddAuthorWindowCommandExcuted, _canOpenAddAuthorWindowCommandExcute);
+            #endregion
+
+            #region All the orders
+            FillUsersList();
+
+            OpenAddOrderWindowCommand = new LambdaCommand(_onOpenAddOrderWindowCommandExcuted, _canOpenAddOrderWindowCommandExcute);
+            ChangeOrderCommand = new LambdaCommand(_onChangeOrderCommandExcuted, _canChangeOrderCommandExcute);
+            DeleteOrderCommand = new LambdaCommand(_onDeleteOrderCommandExcuted, _canDeleteOrderCommandExcute);
             #endregion
             #endregion
         }
@@ -299,6 +368,7 @@ namespace World_of_books.ViewModels.Administrator
             SessionData.CurrentDialogue.ShowDialog();
 
             UpdateUsersList();
+            FillUsersList();
         }
         #endregion
 
@@ -334,6 +404,7 @@ namespace World_of_books.ViewModels.Administrator
                 SessionData.CurrentDialogue.ShowDialog();
 
                 UpdateUsersList();
+                FillUsersList();
             }
             else
                 MessageBox.Show("Перед изменением, выберите пользователя", "Пользователь не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -405,7 +476,7 @@ namespace World_of_books.ViewModels.Administrator
             if (_idTag != 0)
                 DisplayBooks = DisplayBooks.Where(b => b.Tag.Any(t => t.Id == _idTag)).ToList();
 
-            if (DisplayUsers.Count == 0)
+            if (DisplayBooks.Count == 0)
                 MessageBox.Show("По вашему запросу книги не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
@@ -481,6 +552,81 @@ namespace World_of_books.ViewModels.Administrator
             }
             else
                 MessageBox.Show("Перед удалением, выберите книгу", "Пользователь не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        #endregion
+        #endregion
+
+        #region All the orders
+        private void FillUsersList()
+        {
+            _customersList.Clear();
+
+            _customersList.Add(new User() { Lastname = "Все клиенты" });
+            foreach (var customer in CourseworkEntities.Instance.User.Where(u => u.IdRole == CUSTOMER_ROLE))
+                _customersList.Add(customer);
+        }
+
+        private void UpdateOrdersList()
+        {
+            DisplayOrder = CourseworkEntities.Instance.Order.ToList();
+
+            if (_idUser != 0)
+                DisplayOrder = DisplayOrder.Where(o => o.IdUser == _idUser).ToList();
+
+            if (_selectedDate != null && _selectedDate != DateTime.MinValue)
+                DisplayOrder = DisplayOrder.Where(o => o.DateOfOrder == _selectedDate).ToList();
+
+            if (DisplayOrder.Count == 0)
+                MessageBox.Show("По вашему запросу заказы не найдены", "Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+
+        #region OpenAddOrderWindowCommand
+        public ICommand OpenAddOrderWindowCommand { get; }
+        private bool _canOpenAddOrderWindowCommandExcute(object p) => true;
+        private void _onOpenAddOrderWindowCommandExcuted(object p)
+        {
+            SessionData.SelectedOrder = null;
+
+            SessionData.CurrentDialogue = new AddOrderWindow();
+            SessionData.CurrentDialogue.ShowDialog();
+
+            UpdateOrdersList();
+        }
+        #endregion
+
+        #region ChangeOrderCommand
+        public ICommand ChangeOrderCommand { get; }
+        private bool _canChangeOrderCommandExcute(object p) => true;
+        private void _onChangeOrderCommandExcuted(object p)
+        {
+            if (SelectedOrder != null)
+            {
+                SessionData.SelectedOrder = _selectedOrder;
+
+                SessionData.CurrentDialogue = new AddOrderWindow();
+                SessionData.CurrentDialogue.ShowDialog();
+
+                UpdateOrdersList();
+            }
+            else
+                MessageBox.Show("Перед изменением, выберите заказ", "Заказ не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        #endregion
+
+        #region DeleteOrderCommand
+        public ICommand DeleteOrderCommand { get; }
+        private bool _canDeleteOrderCommandExcute(object p) => true;
+        private void _onDeleteOrderCommandExcuted(object p)
+        {
+            if (SelectedOrder != null)
+            {
+                CourseworkEntities.Instance.Order.Remove(SelectedOrder);
+                CourseworkEntities.Instance.SaveChanges();
+
+                UpdateOrdersList();
+            }
+            else
+                MessageBox.Show("Перед удалением, выберите заказ", "Заказ не выбран", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         #endregion
         #endregion
