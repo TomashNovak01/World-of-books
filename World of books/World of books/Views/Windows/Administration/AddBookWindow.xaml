@@ -4,9 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:World_of_books.Views.Windows.Administration"
+        xmlns:viewModel="clr-namespace:World_of_books.ViewModels.Administrator"
+        xmlns:materialDesigh="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Height="450" Width="800">
+
+    <Window.DataContext>
+        <viewModel:AddBookWindowViewModel/>
+    </Window.DataContext>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Заполните поля" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Grid.Row="0"/>
+
+        <ComboBox ItemsSource="{Binding DisplayPublishingHouse}" SelectedItem="{Binding PublishingHouse}" FontSize="20" Margin="15 0" Grid.Row="1"/>
+
+        <TextBox Text="{Binding Title}" materialDesigh:HintAssist.Hint="Название книги" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="2"/>
+        <TextBox Text="{Binding Summary}" materialDesigh:HintAssist.Hint="Описание" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="3"/>
+        <TextBox Text="{Binding Rating}" materialDesigh:HintAssist.Hint="Рейтинг" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="4"/>
+
+        <DatePicker Text="{Binding DateOfPublish}" FontSize="20" Margin="15 0" Grid.Row="5"/>
+
+        <TextBox Text="{Binding NumberOfBooksLeftInStock}" materialDesigh:HintAssist.Hint="Количество книг на складе" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="6"/>
+        <TextBox Text="{Binding Cost}" materialDesigh:HintAssist.Hint="Цена" FontSize="20" Margin="15 0" VerticalAlignment="Center" Grid.Row="7"/>
     </Grid>
 </Window>
